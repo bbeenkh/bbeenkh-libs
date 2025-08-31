@@ -64,8 +64,6 @@ export default defineConfig({
         'react-dom',
         'react-toastify',
         'tailwind-merge',
-        'react-datepicker',
-        'date-fns',
         'react-modal',
         'jotai',
       ], // 외부 라이브러리 지정 (번들에 포함되지 않고 외부 라이브러리를 사용하도록 설정)
