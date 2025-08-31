@@ -1,6 +1,6 @@
 {
   "name": "@imnotpizza/imnotpizza-libs",
-  "version": "2.4.4",
+  "version": "2.4.5",
   "type": "module",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
-  "sideEffects": false,
+  "sideEffects": true,
   "author": {
     "name": "liam-koh"
   },
