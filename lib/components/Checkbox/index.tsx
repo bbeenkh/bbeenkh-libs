@@ -4,97 +4,96 @@
  * @description 체크박스 컴포넌트
  */
 
-import React, { InputHTMLAttributes, forwardRef } from 'react';
-import styled from 'styled-components';
-import '@/index.css';
+import React, { InputHTMLAttributes, forwardRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+
+const UncheckedIcon = () => (
+  <svg width="100%" height="100%" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1.25" y="0.5" width="23" height="23" rx="3.5" stroke="#E2E2E2" />
+  </svg>
+);
+
+const CheckedIcon = () => (
+  <svg width="100%" height="100%" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0.75" width="24" height="24" rx="4" fill="#232323" />
+    <path
+      d="M10.6134 14.5836L7.83339 11.8036L6.88672 12.7436L10.6134 16.4703L18.6134 8.47027L17.6734 7.53027L10.6134 14.5836Z"
+      fill="white"
+    />
+  </svg>
+);
+
+const DisabledIcon = () => (
+  <svg width="100%" height="100%" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0.75" width="24" height="24" rx="4" fill="#E2E2E2" />
+  </svg>
+);
 
 export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label?: string;
   className?: string;
+  checkedIcon?: React.ReactNode;
+  uncheckedIcon?: React.ReactNode;
+  disabledIcon?: React.ReactNode;
 }
 
 function Checkbox(
-  { className, label, id, onChange, ...props }: ICheckboxProps,
+  {
+    className,
+    label,
+    id,
+    checkedIcon = <CheckedIcon />,
+    uncheckedIcon = <UncheckedIcon />,
+    disabledIcon = <DisabledIcon />,
+    onChange,
+    ...props
+  }: ICheckboxProps,
   ref: React.ForwardedRef<HTMLInputElement>,
 ) {
+  const isControlled = props.checked !== undefined;
+  const [internalChecked, setInternalChecked] = useState(props.defaultChecked ?? false);
+  const isChecked = isControlled ? !!props.checked : internalChecked;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isControlled) setInternalChecked(e.target.checked);
+    onChange?.(e);
+  };
+
+  const icon = props.disabled ? disabledIcon : isChecked ? checkedIcon : uncheckedIcon;
+
   return (
-    <Container
+    <div
       className={twMerge(
-        'ods-relative ods-h-6 ods-flex ods-gap-xs',
+        'ods-inline-flex ods-items-center ods-gap-xs',
         props.disabled ? 'ods-cursor-default' : 'ods-cursor-pointer',
         className,
       )}
     >
-      <CheckboxInput
-        type="checkbox"
-        {...props}
-        onChange={onChange}
-        id={id}
-        ref={ref}
-        className={props.disabled ? 'ods-cursor-default' : 'ods-cursor-pointer'}
-      />
-      <div
-        className={twMerge(
-          'ods-absolute ods-bottom-0 ods-left-0 ods-z-5',
-          'checkbox-icon',
-        )}
-      />
-      <label
-        className={twMerge(
-          'ods-text-black ods-text-sm',
-          props.disabled && 'ods-text-gray-500',
-        )}
-        htmlFor={id}
-      >
-        {label}
-      </label>
-    </Container>
+      <div className="ods-relative ods-w-5 ods-h-5 ods-shrink-0">
+        <input
+          type="checkbox"
+          {...props}
+          onChange={handleChange}
+          id={id}
+          ref={ref}
+          className={twMerge(
+            'ods-absolute ods-inset-0 ods-w-full ods-h-full ods-opacity-0 ods-z-10',
+            props.disabled ? 'ods-cursor-default' : 'ods-cursor-pointer',
+          )}
+        />
+        <div className="ods-pointer-events-none">{icon}</div>
+      </div>
+      {label && (
+        <label
+          className={twMerge('ods-text-black ods-text-sm', props.disabled && 'ods-text-gray-500')}
+          htmlFor={id}
+        >
+          {label}
+        </label>
+      )}
+    </div>
   );
 }
 
 export default forwardRef(Checkbox);
-
-const CheckboxInput = styled.input`
-  width: 1.25em;
-  height: 1.25em;
-  z-index: 10;
-  opacity: 0 !important;
-
-  &[type='checkbox'] {
-    width: 1.25em;
-    height: 1.25em;
-    z-index: 5;
-    opacity: 0 !important;
-  }
-
-  &[type='checkbox'] + .checkbox-icon {
-    width: 1.25em;
-    height: 1.25em;
-    background: var(--ods-checkbox-unselected) no-repeat;
-    background-size: contain;
-  }
-
-  &[type='checkbox']:checked + .checkbox-icon {
-    width: 1.25em;
-    height: 1.25em;
-    background: var(--ods-checkbox-selected) no-repeat;
-    background-size: contain;
-  }
-
-  &[type='checkbox']:disabled + .checkbox-icon {
-    width: 1.25em;
-    height: 1.25em;
-    background: var(--ods-checkbox-disabled) no-repeat;
-    background-size: contain;
-    cursor: default;
-  }
-`;
-
-const Container = styled.div`
-  width: auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-`;
