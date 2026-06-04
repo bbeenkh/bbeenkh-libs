@@ -1,3 +1,4 @@
+import useInfiniteScroll from './hooks/useInfiniteScroll';
 import ODSCheckbox from '@/components/Checkbox';
 import ODSRadioButton from '@/components/RadioButton';
 import ODSButton from './components/Button';
@@ -15,3 +16,5 @@ export const Card = ODSCard;
 export const Input = ODSInput;
 export const Pagination = ODSPagination;
 export const Skeleton = ODSSkeleton;
+
+export { useInfiniteScroll };
