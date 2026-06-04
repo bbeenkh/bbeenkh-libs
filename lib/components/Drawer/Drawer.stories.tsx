@@ -27,18 +27,18 @@ const SampleDrawer = () => {
 
   return (
     <>
-      <div className="ods-w-full ods-h-[500px] ods-overflow-y-scroll ods-p-0 ods-m-0 ods-bg-gray-100">
-        <Layout className="ods-h-auto">
-          <Layout.Header className="ods-bg-white" sticky>
-            <div className="ods-w-full ods-flex ods-justify-start ods-items-center">
+      <div className="w-full h-[500px] overflow-y-scroll p-0 m-0 bg-gray-100">
+        <Layout styleClass={{ root: 'h-auto' }}>
+          <Layout.Header styleClass={{ root: 'bg-white m-0 sticky top-0' }}>
+            <div className="w-full flex justify-start items-center">
               <BarsSolid
                 fill="black"
-                className="ods-cursor-pointer"
+                className="cursor-pointer"
                 onClick={() => setIsDrawerOpen(!isDrawerOpen)}
               />
             </div>
           </Layout.Header>
-          <Layout.Body isDrawerOpen={isDrawerOpen}>
+          <Layout.Body>
             <Drawer isOpen={isDrawerOpen}>
               {/* drawer item들 추후 모듈화 필요하면 추가 */}
               <DrawerIndex title="title">

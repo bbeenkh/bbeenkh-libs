@@ -9,20 +9,13 @@ const meta: Meta<typeof IconButton> = {
 /**
  * Icon Buttons
  * - 내부에 아이콘, 이미지 등 요소 탑재 가능한 투명 버튼
- * - props 구조는 ODS Button과 사용방식 동일
  */
 export const Default = () => {
   return (
-    <div className="ods-flex gap-6">
-      <IconButton>
-        <XmarkSolid className="ods-fill-black ods-w-md ods-h-md" />
-      </IconButton>
-      <IconButton>
-        <XmarkSolid className="ods-fill-black ods-w-xl ods-h-xl" />
-      </IconButton>
-      <IconButton>
-        <XmarkSolid className="ods-fill-black ods-w-8 ods-h-8" />
-      </IconButton>
+    <div className="flex gap-6">
+      <IconButton icon={<XmarkSolid className="w-5 h-5" />} />
+      <IconButton icon={<XmarkSolid className="w-7 h-7" />} />
+      <IconButton icon={<XmarkSolid className="w-8 h-8" />} />
     </div>
   );
 };

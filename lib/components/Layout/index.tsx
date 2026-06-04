@@ -1,94 +1,95 @@
 import React from 'react';
-import { twMerge } from 'tailwind-merge';
 
-interface IProps {
-  children: React.ReactNode;
-  className?: string;
+interface StyleClass {
+  root?: string;
 }
 
+interface Props {
+  children: React.ReactNode;
+  styleClass?: StyleClass;
+}
+
+interface LayoutProps extends Props {
+  maxWidth?: string;
+  minWidth?: string;
+}
+
+const cx = (...classes: (string | undefined)[]) =>
+  classes.filter(Boolean).join(' ') || undefined;
+
 /**
- * 컴포넌트 레이아웃
- *
- * @returns
+ * # Layout
+ * ---
+ * - 페이지 루트 레이아웃 컴포넌트. `<main>` 태그로 렌더링되며 항상 화면을 꽉 채운다 (`flex flex-col min-h-screen`).
+ * - `Layout.Header`, `Layout.Body`(`flex-1`), `Layout.Footer` 서브컴포넌트와 함께 사용한다.
+ * - max/min width는 props로 제어한다.
+ * ---
+ * @param children - 렌더링할 자식 요소
+ * @param styleClass - 루트 요소에 추가할 className 객체
+ * @param maxWidth - 최대 너비 (예: "1200px")
+ * @param minWidth - 최소 너비 (예: "320px")
+ * ---
+ * @example
+ * <Layout maxWidth="1200px" minWidth="320px">
+ *   <Layout.Header>헤더</Layout.Header>
+ *   <Layout.Body>본문</Layout.Body>
+ *   <Layout.Footer>푸터</Layout.Footer>
+ * </Layout>
  */
-function Layout({ children, className }: IProps) {
+function Layout({ children, styleClass, maxWidth, minWidth }: LayoutProps) {
   return (
     <main
-      className={twMerge(
-        'ods-w-full ods-h-full ods-flex ods-flex-col ods-items-center',
-        className,
-      )}
+      className={cx('flex flex-col min-h-screen', styleClass?.root)}
+      style={{ maxWidth, minWidth }}
     >
       {children}
     </main>
   );
 }
 
-Layout.Header = ({
-  sticky,
-  children,
-  className,
-}: IProps & { sticky?: boolean }) => {
-  return (
-    <header
-      className={twMerge(
-        'ods-w-full ods-z-50 ods-flex ods-justify-center',
-        className,
-        sticky ? 'ods-sticky ods-top-0' : '',
-      )}
-    >
-      <div className="ods-layout__header-height ods-h-full ods-w-full ods-layout__width ods-layout__padding ods-flex ods-justify-center">
-        {children}
-      </div>
-    </header>
-  );
-};
+/**
+ * # Layout.Header
+ * ---
+ * - 헤더 영역 서브컴포넌트. `<header>` 태그로 렌더링되며 기본 외부여백이 제거된다.
+ * ---
+ * @param children - 렌더링할 자식 요소
+ * @param styleClass - 루트 요소에 추가할 className 객체
+ * ---
+ * @example
+ * <Layout.Header styleClass={{ root: 'sticky top-0' }}>헤더 내용</Layout.Header>
+ */
+Layout.Header = ({ children, styleClass }: Props) => (
+  <header className={cx('m-0', styleClass?.root)}>{children}</header>
+);
 
 /**
- * Layout Body
- * @param isDrawerOpen: drawer가 open되었는지에 따라 이동, drawer 추가시에만 사용
+ * # Layout.Body
+ * ---
+ * - 본문 영역 서브컴포넌트. `<div>` 태그로 렌더링되며 기본 외부여백이 제거된다.
+ * ---
+ * @param children - 렌더링할 자식 요소
+ * @param styleClass - 루트 요소에 추가할 className 객체
+ * ---
+ * @example
+ * <Layout.Body styleClass={{ root: 'flex-1 overflow-auto' }}>본문 내용</Layout.Body>
  */
-Layout.Body = ({
-  children,
-  className,
-  isDrawerOpen = false,
-  ...props
-}: IProps & {
-  isDrawerOpen?: boolean;
-}) => {
-  return (
-    <div
-      className={twMerge(
-        'max-w-[var(--layout-max-width)] w-full h-auto flex justify-center flex-grow relative',
-        className,
-      )}
-      {...props}
-    >
-      <div
-        className={twMerge(
-          'w-full h-full px-[var(--layout-padding-x)] py-[var(--body-padding-y)] max-w-[var(--layout-width)] transition-[margin-left] duration-200 ease-in-out',
-          isDrawerOpen ? 'ml-[var(--body-drawer-open-margin)]' : '',
-        )}
-      >
-        {children}
-      </div>
-    </div>
-  );
-};
+Layout.Body = ({ children, styleClass }: Props) => (
+  <div className={cx('m-0 flex-1', styleClass?.root)}>{children}</div>
+);
 
-Layout.Footer = ({ children, className }: IProps) => {
-  return (
-    <footer
-      className={twMerge(
-        'ods-w-full ods-z-50 ods-flex ods-justify-center',
-        className,
-      )}
-    >
-      <div className="ods-w-full ods-layout__width ods-layout__padding ods-layout__footer-height">
-        {children}
-      </div>
-    </footer>
-  );
-};
+/**
+ * # Layout.Footer
+ * ---
+ * - 푸터 영역 서브컴포넌트. `<footer>` 태그로 렌더링되며 기본 외부여백이 제거된다.
+ * ---
+ * @param children - 렌더링할 자식 요소
+ * @param styleClass - 루트 요소에 추가할 className 객체
+ * ---
+ * @example
+ * <Layout.Footer styleClass={{ root: 'sticky bottom-0' }}>푸터 내용</Layout.Footer>
+ */
+Layout.Footer = ({ children, styleClass }: Props) => (
+  <footer className={cx('m-0', styleClass?.root)}>{children}</footer>
+);
 
 export default Layout;

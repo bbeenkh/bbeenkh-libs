@@ -57,7 +57,7 @@ export const SpinnerInCard = () => {
 
   return (
     <>
-      <Button size="sm" onClick={load}>
+      <Button styleClass={{ root: 'px-3 py-1 border rounded text-sm' }} onClick={load}>
         로딩 시작
       </Button>
       <Card className="ods-justify-center ods-h-[10em]">

@@ -1,5 +1,4 @@
 import type { Preview } from '@storybook/react';
-import { DialogProvider } from '../lib/components/Dialog';
 import React from 'react';
 import '@/index.css';
 
@@ -26,9 +25,7 @@ const preview: Preview = {
 
 export const decorators = [
   (Story) => (
-    <DialogProvider>
-      <Story />
-    </DialogProvider>
+    <Story />
   ),
 ];
 

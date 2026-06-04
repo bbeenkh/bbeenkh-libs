@@ -18,8 +18,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "allowImportingTsExtensions": true,
-    "incremental": true
+    "incremental": true,
+    "types": ["vitest/globals"]
   },
   "include": ["lib"],
-  "exclude": ["node_modules", ".yarn"]
+  "exclude": ["node_modules", ".yarn", "lib/components/original"]
 }
