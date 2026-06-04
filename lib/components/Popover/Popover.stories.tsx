@@ -8,7 +8,7 @@ import Popover from '.';
  * - sideOffset prop으로 트리거와의 간격 조정 가능 (기본값: 8px)
  */
 const meta: Meta = {
-  title: 'Atoms/Popover',
+  title: 'Components/Popover',
 };
 
 export default meta;

@@ -20,6 +20,7 @@ export const DefaultSkeleton = () => (
 );
 
 const meta: Meta<typeof Skeleton> = {
+  title: 'Components/Skeleton',
   component: DefaultSkeleton,
   argTypes: {},
 };

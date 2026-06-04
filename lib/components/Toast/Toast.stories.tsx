@@ -8,7 +8,7 @@ import { useState } from 'react';
  * - `open` / `onOpenChange` / `message` prop으로 외부에서 상태를 직접 제어
  */
 const meta: Meta = {
-  title: 'Atoms/Toast',
+  title: 'Components/Toast',
 };
 
 export default meta;

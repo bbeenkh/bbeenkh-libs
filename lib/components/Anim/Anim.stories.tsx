@@ -14,7 +14,7 @@ type ScaleFadeComponent = typeof Anim.ScaleFade;
  * > 애니메이션을 다시 재생하려면 **Remount component** 버튼을 누르세요.
  */
 const meta: Meta<FadeComponent> = {
-  title: 'Atoms/Anim',
+  title: 'Components/Anim',
   component: Anim.Fade,
   argTypes: {
     type: {

@@ -9,7 +9,7 @@ import { useState } from 'react';
  * - 기본 스타일 없음 — 모든 스타일은 `styleClass`로 주입
  */
 const meta: Meta = {
-  title: 'Atoms/Selectbox',
+  title: 'Components/Selectbox',
 };
 
 export default meta;

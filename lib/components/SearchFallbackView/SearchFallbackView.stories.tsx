@@ -27,7 +27,7 @@ const baseStyle = {
  * - `styleClass`로 스타일 주입
  */
 const meta: Meta<typeof SearchFallbackView> = {
-  title: 'Atoms/SearchFallbackView',
+  title: 'Components/SearchFallbackView',
   component: SearchFallbackView,
   argTypes: {
     message: { control: 'text' },

@@ -8,7 +8,7 @@ import { useState } from 'react';
  * - `data-[state=active]` 셀렉터로 활성 탭 스타일 지정
  */
 const meta: Meta = {
-  title: 'Atoms/Tab',
+  title: 'Components/Tab',
 };
 
 export default meta;

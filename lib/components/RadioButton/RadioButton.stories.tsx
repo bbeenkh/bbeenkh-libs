@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const meta: Meta<typeof RadioButton> = {
+  title: 'Components/RadioButton',
   component: RadioButton,
   argTypes: {
     disabled: {

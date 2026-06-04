@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const meta: Meta<typeof Checkbox> = {
+  title: 'Components/Checkbox',
   component: Checkbox,
   argTypes: {
     disabled: {

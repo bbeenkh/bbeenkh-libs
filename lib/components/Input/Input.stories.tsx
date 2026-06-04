@@ -9,7 +9,7 @@ import Input from '.';
  * - `onEnter`: Enter 키 콜백
  */
 const meta: Meta<typeof Input> = {
-  title: 'Atoms/Input',
+  title: 'Components/Input',
   component: Input,
   argTypes: {
     placeholder: { control: 'text' },

@@ -11,6 +11,7 @@ import Button from '../Button';
  * - className을 사용해 사이즈/색상 커스텀이 가능합니다 (text, fill 속성 사용)
  */
 const meta: Meta<typeof Spinner> = {
+  title: 'Components/Spinner',
   component: Spinner,
 };
 
