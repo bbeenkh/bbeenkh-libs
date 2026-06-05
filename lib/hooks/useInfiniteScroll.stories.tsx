@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider, useInfiniteQuery } from '@tanstack/react-query';
 import { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import useInfiniteScroll from './useInfiniteScroll';
@@ -52,6 +53,60 @@ const InfiniteScrollDemo = ({ maxPages = 5 }: { maxPages?: number }) => {
   );
 };
 
+const fetchItems = async ({ pageParam = 1 }: { pageParam: number }) => {
+  await new Promise((resolve) => setTimeout(resolve, 800));
+  return {
+    items: generateItems(pageParam),
+    nextPage: pageParam < 5 ? pageParam + 1 : undefined,
+  };
+};
+
+const queryClient = new QueryClient();
+
+const InfiniteScrollWithReactQueryDemo = () => {
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ['infinite-items'],
+      queryFn: fetchItems,
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => lastPage.nextPage,
+    });
+
+  const items = data?.pages.flatMap((page) => page.items) ?? [];
+
+  const { InfiniteScrollWrapper } = useInfiniteScroll({
+    onTriggered: fetchNextPage,
+    isLoading: isFetchingNextPage,
+    hasNextPage,
+  });
+
+  return (
+    <div className="max-w-sm mx-auto p-4 border rounded-lg h-[400px] overflow-y-auto">
+      <InfiniteScrollWrapper
+        thresholdUI={
+          isFetchingNextPage ? (
+            <p className="text-center text-sm text-gray-500">로딩 중...</p>
+          ) : !hasNextPage ? (
+            <p className="text-center text-sm text-gray-500">모든 항목을 불러왔습니다.</p>
+          ) : null
+        }
+      >
+        {items.map((item) => (
+          <div key={item.id} className="p-3 bg-gray-100 rounded text-sm">
+            {item.label}
+          </div>
+        ))}
+      </InfiniteScrollWrapper>
+    </div>
+  );
+};
+
+const WithReactQueryProvider = () => (
+  <QueryClientProvider client={queryClient}>
+    <InfiniteScrollWithReactQueryDemo />
+  </QueryClientProvider>
+);
+
 const meta: Meta<typeof InfiniteScrollDemo> = {
   title: 'Hooks/useInfiniteScroll',
   component: InfiniteScrollDemo,
@@ -72,4 +127,9 @@ export const Default: Story = {
   args: {
     maxPages: 5,
   },
+};
+
+export const WithReactQuery: StoryObj<typeof WithReactQueryProvider> = {
+  render: () => <WithReactQueryProvider />,
+  name: 'useInfiniteQuery 연동',
 };
