@@ -13,7 +13,7 @@ interface Props {
 }
 
 /**
- * # SearchFallbackView UI
+ * # Fallback UI
  * ---
  * - 간단설명: 검색 결과 없음 등 폴백 상태를 표시하는 컴포넌트
  * - 아이콘과 메시지를 조합하여 빈 상태(empty state)를 표현한다
@@ -26,7 +26,7 @@ interface Props {
  * - `styleClass.icon`: 아이콘 래퍼 클래스
  * - `styleClass.message`: 메시지 텍스트 클래스
  * @example
- * <SearchFallbackView
+ * <Fallback
  *   message="검색 결과가 없습니다"
  *   icon={<SearchIcon />}
  *   styleClass={{
@@ -36,7 +36,7 @@ interface Props {
  *   }}
  * />
  */
-export default function SearchFallbackView({ message, icon, styleClass }: Props) {
+export default function Fallback({ message, icon, styleClass }: Props) {
   return (
     <div className={styleClass?.root}>
       {icon && (

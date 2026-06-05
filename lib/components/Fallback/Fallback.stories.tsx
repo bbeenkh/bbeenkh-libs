@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import SearchFallbackView from '.';
+import Fallback from '.';
 import Button from '../Button';
 
 const SearchIcon = () => (
@@ -21,14 +21,14 @@ const baseStyle = {
 };
 
 /**
- * 검색 결과 없음 등 빈 상태를 표시하는 SearchFallbackView 컴포넌트
+ * 검색 결과 없음 등 빈 상태를 표시하는 Fallback 컴포넌트
  * - `message`: 표시할 텍스트
  * - `icon`: 선택적 아이콘 ReactNode
  * - `styleClass`로 스타일 주입
  */
-const meta: Meta<typeof SearchFallbackView> = {
-  title: 'Components/SearchFallbackView',
-  component: SearchFallbackView,
+const meta: Meta<typeof Fallback> = {
+  title: 'Components/Fallback',
+  component: Fallback,
   argTypes: {
     message: { control: 'text' },
   },
@@ -36,7 +36,7 @@ const meta: Meta<typeof SearchFallbackView> = {
 
 export default meta;
 
-type Story = StoryObj<typeof SearchFallbackView>;
+type Story = StoryObj<typeof Fallback>;
 
 /** 기본 — 아이콘 + 메시지 */
 export const DefaultFallback: Story = {
@@ -72,7 +72,7 @@ export const OfflineState: Story = {
 export const ErrorState: Story = {
   render: () => (
     <div className="w-full flex flex-col items-center gap-2">
-      <SearchFallbackView
+      <Fallback
         message="검색 도중 알 수 없는 문제가 발생하였습니다."
         styleClass={{
           root: 'flex flex-col items-center gap-3 py-12 text-gray-500',
@@ -90,7 +90,7 @@ export const ErrorState: Story = {
 export const TimeoutState: Story = {
   render: () => (
     <div className="w-full flex flex-col items-center gap-2">
-      <SearchFallbackView
+      <Fallback
         message="요청 시간이 초과되었습니다. 재시도해주세요."
         styleClass={{
           root: 'flex flex-col items-center gap-3 py-12 text-gray-500',
