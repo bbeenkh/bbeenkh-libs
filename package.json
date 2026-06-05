@@ -24,7 +24,7 @@
       "require": "./dist/preset.js",
       "import": "./dist/preset.mjs"
     },
-    "./ods-style": "./dist/ods-style.css"
+    "./style": "./dist/style.css"
   },
   "files": [
     "dist"

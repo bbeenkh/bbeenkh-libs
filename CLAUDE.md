@@ -23,7 +23,7 @@ There is no test script — no unit tests exist in this repo. Storybook stories 
 ### Build Outputs (`dist/`)
 - `index.js` / `index.mjs` — main component bundle (CJS + ESM)
 - `preset.js` / `preset.mjs` — Tailwind CSS preset
-- `ods-style.css` — compiled CSS with all CSS variables and base styles
+- `style.css` — compiled CSS with all CSS variables and base styles
 
 The build is configured in `vite.config.ts` with Terser minification (strips `console.log`). React, React DOM, react-toastify, date-fns, and other peer deps are externalized.
 
@@ -37,7 +37,7 @@ The build is configured in `vite.config.ts` with Terser minification (strips `co
 - `lib/index.css` — CSS variables for colors, typography, spacing, and layout sizes
 
 ### Styling Conventions
-- All Tailwind utility classes are prefixed with `ods-` to avoid conflicts in consuming apps
+- All Tailwind utility classes are prefixed with `` to avoid conflicts in consuming apps
 - Dynamic or variant-based styles use `styled-components`; static layout uses Tailwind + `tailwind-merge` (`twMerge`) + `classnames`
 - CSS custom properties in `lib/index.css` define the full color/spacing/typography token system
 - Checkbox/radio SVG icons are inlined as `data:` URIs in CSS variables

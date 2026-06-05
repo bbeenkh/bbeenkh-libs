@@ -64,12 +64,12 @@ function RadioButton(
   return (
     <div
       className={twMerge(
-        'ods-inline-flex ods-items-center ods-gap-xs',
-        props.disabled ? 'ods-cursor-default' : 'ods-cursor-pointer',
+        'inline-flex items-center gap-xs',
+        props.disabled ? 'cursor-default' : 'cursor-pointer',
         className,
       )}
     >
-      <div className="ods-relative ods-w-5 ods-h-5 ods-shrink-0">
+      <div className="relative w-5 h-5 shrink-0">
         <input
           type="radio"
           {...props}
@@ -77,15 +77,15 @@ function RadioButton(
           id={id}
           ref={ref}
           className={twMerge(
-            'ods-absolute ods-inset-0 ods-w-full ods-h-full ods-opacity-0 ods-z-10',
-            props.disabled ? 'ods-cursor-default' : 'ods-cursor-pointer',
+            'absolute inset-0 w-full h-full opacity-0 z-10',
+            props.disabled ? 'cursor-default' : 'cursor-pointer',
           )}
         />
-        <div className="ods-pointer-events-none">{icon}</div>
+        <div className="pointer-events-none">{icon}</div>
       </div>
       {label && (
         <label
-          className={twMerge('ods-text-black ods-text-sm', props.disabled && 'ods-text-gray-500')}
+          className={twMerge('text-black text-sm', props.disabled && 'text-gray-500')}
           htmlFor={id}
         >
           {label}

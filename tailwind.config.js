@@ -4,6 +4,6 @@ import odsTwPreset from './lib/tailwind.preset.js';
 export default {
   presets: [odsTwPreset],
   content: ['./lib/**/*.{js,jsx,ts,tsx}'],
-  prefix: 'ods-',
+  prefix: '',
   plugins: [],
 };

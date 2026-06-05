@@ -16,23 +16,23 @@ export default function Spinner({ size = 'lg', className }: IProps) {
   const sizeClassName = useMemo(() => {
     switch (size) {
       case 'xs':
-        return 'ods-w-4 ods-h-4';
+        return 'w-4 h-4';
       case 'sm':
-        return 'ods-w-5 ods-h-5';
+        return 'w-5 h-5';
       case 'lg':
-        return 'ods-w-6 ods-h-6';
+        return 'w-6 h-6';
       case 'xl':
-        return 'ods-w-8 ods-h-8';
+        return 'w-8 h-8';
       default:
-        return 'ods-w-6 ods-h-6';
+        return 'w-6 h-6';
     }
   }, [size]);
 
   return (
-    <div className="ods-w-full ods-h-full ods-flex ods-justify-center ods-items-center">
+    <div className="w-full h-full flex justify-center items-center">
       <SpinnerIcon
         className={twJoin(
-          'ods-text-gray-200 ods-animate-spin ods-fill-black',
+          'text-gray-200 animate-spin fill-black',
           sizeClassName,
           className,
         )}

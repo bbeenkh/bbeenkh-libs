@@ -67,15 +67,15 @@ export default function Pagination({
           key={page}
           aria-label={`pg-${page}`}
           className={twMerge(
-            'ods-w-7 ods-h-7 ods-rounded-lg ods-text-title4',
+            'w-7 h-7 rounded-lg text-title4',
             currentPage === page
-              ? 'ods-bg-primary ods-text-gray-100'
-              : 'ods-text-black',
+              ? 'bg-primary text-gray-100'
+              : 'text-black',
           )}
           disabled={currentPage === page}
           onClick={() => onPageChange(page)}
         >
-          <span className="ods-leading-6">{page}</span>
+          <span className="leading-6">{page}</span>
         </button>,
       );
     }
@@ -103,7 +103,7 @@ export default function Pagination({
   return (
     <div
       className={twMerge(
-        'ods-flex ods-justify-center ods-items-center ods-gap-xs',
+        'flex justify-center items-center gap-xs',
         className,
       )}
     >
@@ -117,8 +117,8 @@ export default function Pagination({
           <AnglesLeftSolid
             className={twMerge(
               1 > jumpPageCount('prev')
-                ? 'ods-fill-gray-200'
-                : 'ods-fill-caption ods-cursor-pointer',
+                ? 'fill-gray-200'
+                : 'fill-caption cursor-pointer',
             )}
           />
         </button>
@@ -133,8 +133,8 @@ export default function Pagination({
           <ChevronLeftSolid
             className={twMerge(
               currentPage <= 1
-                ? 'ods-fill-gray-200'
-                : 'ods-fill-caption ods-cursor-pointer',
+                ? 'fill-gray-200'
+                : 'fill-caption cursor-pointer',
             )}
           />
         </button>
@@ -153,8 +153,8 @@ export default function Pagination({
           <ChevronRightSolid
             className={twMerge(
               currentPage >= totalDisplayPages
-                ? 'ods-fill-gray-200'
-                : 'ods-fill-caption ods-cursor-pointer',
+                ? 'fill-gray-200'
+                : 'fill-caption cursor-pointer',
             )}
           />
         </button>
@@ -169,8 +169,8 @@ export default function Pagination({
           <AnglesRightSolid
             className={twMerge(
               totalDisplayPages < jumpPageCount('next')
-                ? 'ods-fill-gray-200'
-                : 'ods-fill-caption ods-cursor-pointer',
+                ? 'fill-gray-200'
+                : 'fill-caption cursor-pointer',
             )}
           />
         </button>

@@ -83,18 +83,18 @@ const userQueryFactory = {
 
 function UserListSkeleton() {
   return (
-    <div className="ods-flex ods-flex-col ods-gap-3 ods-w-full ods-max-w-lg">
+    <div className="flex flex-col gap-3 w-full max-w-lg">
       {[1, 2, 3].map((i) => (
         <Skeleton.Container
           key={i}
-          styleClass={{ root: 'ods-flex ods-items-center ods-gap-4 ods-p-4 ods-border ods-border-gray-200 ods-rounded-lg' }}
+          styleClass={{ root: 'flex items-center gap-4 p-4 border border-gray-200 rounded-lg' }}
         >
-          <Skeleton.Circle styleClass={{ root: 'ods-w-10 ods-h-10 ods-rounded-full ods-bg-gray-200 ods-animate-pulse ods-shrink-0' }} />
-          <div className="ods-flex ods-flex-col ods-gap-2 ods-flex-1">
-            <Skeleton.Box styleClass={{ root: 'ods-h-4 ods-w-1/3 ods-rounded ods-bg-gray-200 ods-animate-pulse' }} />
-            <Skeleton.Box styleClass={{ root: 'ods-h-3 ods-w-1/2 ods-rounded ods-bg-gray-200 ods-animate-pulse' }} />
+          <Skeleton.Circle styleClass={{ root: 'w-10 h-10 rounded-full bg-gray-200 animate-pulse shrink-0' }} />
+          <div className="flex flex-col gap-2 flex-1">
+            <Skeleton.Box styleClass={{ root: 'h-4 w-1/3 rounded bg-gray-200 animate-pulse' }} />
+            <Skeleton.Box styleClass={{ root: 'h-3 w-1/2 rounded bg-gray-200 animate-pulse' }} />
           </div>
-          <Skeleton.Box styleClass={{ root: 'ods-h-5 ods-w-12 ods-rounded-xl ods-bg-gray-200 ods-animate-pulse' }} />
+          <Skeleton.Box styleClass={{ root: 'h-5 w-12 rounded-xl bg-gray-200 animate-pulse' }} />
         </Skeleton.Container>
       ))}
     </div>
@@ -103,21 +103,21 @@ function UserListSkeleton() {
 
 function UserCard({ user }: { user: IUser }) {
   return (
-    <Card className="ods-p-4 ods-flex-row ods-items-center ods-gap-4 ods-rounded-lg">
-      <div className="ods-w-10 ods-h-10 ods-rounded-full ods-bg-gray-200 ods-flex ods-items-center ods-justify-center ods-shrink-0">
-        <span className="ods-text-sm ods-font-bold ods-text-gray-600">
+    <Card className="p-4 flex-row items-center gap-4 rounded-lg">
+      <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+        <span className="text-sm font-bold text-gray-600">
           {user.name[0]}
         </span>
       </div>
-      <Card.Body className="ods-flex-col ods-items-start ods-flex-1 ods-gap-0.5">
-        <span className="ods-text-sm ods-font-bold ods-text-gray-900">{user.name}</span>
-        <span className="ods-text-xs ods-text-gray-500">{user.email}</span>
+      <Card.Body className="flex-col items-start flex-1 gap-0.5">
+        <span className="text-sm font-bold text-gray-900">{user.name}</span>
+        <span className="text-xs text-gray-500">{user.email}</span>
       </Card.Body>
       <span
-        className={`ods-text-xs ods-px-2 ods-py-0.5 ods-rounded-xl ods-font-bold ${
+        className={`text-xs px-2 py-0.5 rounded-xl font-bold ${
           user.role === '관리자'
-            ? 'ods-bg-gray-900 ods-text-white'
-            : 'ods-bg-gray-100 ods-text-gray-600'
+            ? 'bg-gray-900 text-white'
+            : 'bg-gray-100 text-gray-600'
         }`}
       >
         {user.role}
@@ -128,10 +128,10 @@ function UserCard({ user }: { user: IUser }) {
 
 function ErrorView({ onRetry }: { onRetry: () => void }) {
   return (
-    <div className="ods-flex ods-flex-col ods-items-center ods-gap-4 ods-p-8 ods-text-center">
-      <p className="ods-text-sm ods-text-state-danger ods-font-bold">데이터를 불러오지 못했습니다.</p>
+    <div className="flex flex-col items-center gap-4 p-8 text-center">
+      <p className="text-sm text-state-danger font-bold">데이터를 불러오지 못했습니다.</p>
       <Button
-        styleClass={{ root: 'ods-px-4 ods-py-2 ods-bg-gray-900 ods-text-white ods-text-sm ods-rounded-md' }}
+        styleClass={{ root: 'px-4 py-2 bg-gray-900 text-white text-sm rounded-md' }}
         onClick={onRetry}
       >
         다시 시도
@@ -160,13 +160,13 @@ function UserList() {
   if (isError) return <ErrorView onRetry={refetch} />;
 
   return (
-    <div className="ods-flex ods-flex-col ods-gap-4 ods-w-full ods-max-w-lg">
-      <div className="ods-flex ods-items-center ods-justify-between">
-        <h2 className="ods-text-base ods-font-bold ods-text-gray-900">
+    <div className="flex flex-col gap-4 w-full max-w-lg">
+      <div className="flex items-center justify-between">
+        <h2 className="text-base font-bold text-gray-900">
           사용자 목록 ({data?.meta.total ?? 0}명)
         </h2>
         <Button
-          styleClass={{ root: 'ods-px-3 ods-py-1.5 ods-bg-gray-900 ods-text-white ods-text-sm ods-rounded-md disabled:ods-opacity-50' }}
+          styleClass={{ root: 'px-3 py-1.5 bg-gray-900 text-white text-sm rounded-md disabled:opacity-50' }}
           disabled={isPending}
           onClick={() =>
             createUser({
@@ -179,7 +179,7 @@ function UserList() {
           {isPending ? '추가 중…' : '+ 사용자 추가'}
         </Button>
       </div>
-      <div className="ods-flex ods-flex-col ods-gap-2">
+      <div className="flex flex-col gap-2">
         {data?.data.map((user) => (
           <UserCard key={user.id} user={user} />
         ))}

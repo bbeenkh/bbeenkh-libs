@@ -11,112 +11,112 @@
     -moz-osx-font-smoothing: grayscale;
 
     /* checkbox icons */
-    --ods-checkbox-selected: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.75' width='24' height='24' rx='4' fill='%23232323'/%3E%3Cpath d='M10.6134 14.5836L7.83339 11.8036L6.88672 12.7436L10.6134 16.4703L18.6134 8.47027L17.6734 7.53027L10.6134 14.5836Z' fill='white'/%3E%3C/svg%3E%0A");
-    --ods-checkbox-unselected: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='1.25' y='0.5' width='23' height='23' rx='3.5' stroke='%23E2E2E2'/%3E%3C/svg%3E%0A");
-    --ods-checkbox-disabled: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.75' width='24' height='24' rx='4' fill='%23E2E2E2'/%3E%3C/svg%3E%0A");
+    --checkbox-selected: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.75' width='24' height='24' rx='4' fill='%23232323'/%3E%3Cpath d='M10.6134 14.5836L7.83339 11.8036L6.88672 12.7436L10.6134 16.4703L18.6134 8.47027L17.6734 7.53027L10.6134 14.5836Z' fill='white'/%3E%3C/svg%3E%0A");
+    --checkbox-unselected: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='1.25' y='0.5' width='23' height='23' rx='3.5' stroke='%23E2E2E2'/%3E%3C/svg%3E%0A");
+    --checkbox-disabled: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.75' width='24' height='24' rx='4' fill='%23E2E2E2'/%3E%3C/svg%3E%0A");
 
     /* radio icons */
-    --ods-radio-selected: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Group 3019'%3E%3Ccircle id='Ellipse 31' cx='10.75' cy='10' r='10' fill='%23232323'/%3E%3Ccircle id='Ellipse 32' cx='10.75' cy='10' r='5' fill='white'/%3E%3C/g%3E%3C/svg%3E%0A");
-    --ods-radio-unselected: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='State=Unselected, Type=Default'%3E%3Cpath id='Vector' d='M12.75 2C7.23 2 2.75 6.48 2.75 12C2.75 17.52 7.23 22 12.75 22C18.27 22 22.75 17.52 22.75 12C22.75 6.48 18.27 2 12.75 2ZM12.75 20C8.33 20 4.75 16.42 4.75 12C4.75 7.58 8.33 4 12.75 4C17.17 4 20.75 7.58 20.75 12C20.75 16.42 17.17 20 12.75 20Z' fill='%23E2E2E2'/%3E%3C/g%3E%3C/svg%3E%0A");
-    --ods-radio-disabled: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle id='Ellipse 33' cx='10.75' cy='10' r='10' fill='%23E2E2E2'/%3E%3C/svg%3E%0A");
+    --radio-selected: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Group 3019'%3E%3Ccircle id='Ellipse 31' cx='10.75' cy='10' r='10' fill='%23232323'/%3E%3Ccircle id='Ellipse 32' cx='10.75' cy='10' r='5' fill='white'/%3E%3C/g%3E%3C/svg%3E%0A");
+    --radio-unselected: url("data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='State=Unselected, Type=Default'%3E%3Cpath id='Vector' d='M12.75 2C7.23 2 2.75 6.48 2.75 12C2.75 17.52 7.23 22 12.75 22C18.27 22 22.75 17.52 22.75 12C22.75 6.48 18.27 2 12.75 2ZM12.75 20C8.33 20 4.75 16.42 4.75 12C4.75 7.58 8.33 4 12.75 4C17.17 4 20.75 7.58 20.75 12C20.75 16.42 17.17 20 12.75 20Z' fill='%23E2E2E2'/%3E%3C/g%3E%3C/svg%3E%0A");
+    --radio-disabled: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle id='Ellipse 33' cx='10.75' cy='10' r='10' fill='%23E2E2E2'/%3E%3C/svg%3E%0A");
 
     /* ODS/layout 사이즈 조정 변수들 */
     /* drawer width 값 */
-    --ods-drawer-width: 12.5em;
+    --drawer-width: 12.5em;
     /* header 높이 값 */
-    --ods-header-height: 4em;
+    --header-height: 4em;
     /* 레이아웃이 줄어들 때 생기는 좌우 여백 padding 값 */
-    --ods-layout-padding: 1.5em;
+    --layout-padding: 1.5em;
     /* 레이아웃의 body에 사용되는 padding */
-    --ods-body-padding: 1.5em;
+    --body-padding: 1.5em;
     /* 레이아웃의 footer height */
-    --ods-footer-height: 6em;
+    --footer-height: 6em;
     /* 레이아웃의 width 속성, body 컨텐츠의 min-width, max-width는 여기서 지정 */
-    --ods-min-width: 13.12rem;
+    --min-width: 13.12rem;
 
     /* ODS 컬러팔레트 */
     /* Colors */
-    --ods-color-primary: #1976D2;
-    --ods-color-secondary: #676767;
-    --ods-color-tertiary: #9a9a9a;
-    --ods-color-caption: #b3b3b3;
-    --ods-color-black: #000000;
-    --ods-color-white: #ffffff;
-    --ods-color-off-white: #f8f8f8;
-    --ods-color-card: #fcfcfc;
+    --color-primary: #1976D2;
+    --color-secondary: #676767;
+    --color-tertiary: #9a9a9a;
+    --color-caption: #b3b3b3;
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-off-white: #f8f8f8;
+    --color-card: #fcfcfc;
 
     /* Gray Scale */
-    --ods-color-gray-900: #232323;
-    --ods-color-gray-800: #454545;
-    --ods-color-gray-700: #676767;
-    --ods-color-gray-600: #787878;
-    --ods-color-gray-500: #9a9a9a;
-    --ods-color-gray-400: #b3b3b3;
-    --ods-color-gray-300: #cdcdcd;
-    --ods-color-gray-200: #e2e2e2;
-    --ods-color-gray-100: #f8f8f8;
-    --ods-color-gray-50: #fcfcfc;
+    --color-gray-900: #232323;
+    --color-gray-800: #454545;
+    --color-gray-700: #676767;
+    --color-gray-600: #787878;
+    --color-gray-500: #9a9a9a;
+    --color-gray-400: #b3b3b3;
+    --color-gray-300: #cdcdcd;
+    --color-gray-200: #e2e2e2;
+    --color-gray-100: #f8f8f8;
+    --color-gray-50: #fcfcfc;
 
     /* State Colors */
-    --ods-color-state-danger: #dd0027;
-    --ods-color-state-warning: #ff8a00;
-    --ods-color-state-success: #00dd31;
-    --ods-color-state-info: #0066fe;
+    --color-state-danger: #dd0027;
+    --color-state-warning: #ff8a00;
+    --color-state-success: #00dd31;
+    --color-state-info: #0066fe;
 
     /* Borders */
-    --ods-color-border-active: #232323;
-    --ods-color-border-primary: #e2e2e2;
-    --ods-color-border-secondary: #b3b3b3;
+    --color-border-active: #232323;
+    --color-border-primary: #e2e2e2;
+    --color-border-secondary: #b3b3b3;
 
     /* Font Sizes */
-    --ods-font-xxxl: 1.5em;
-    --ods-font-xxl: 1.38em;
-    --ods-font-xl: 1.25em;
-    --ods-font-lg: 1.13em;
-    --ods-font-md: 1em;
-    --ods-font-sm: 0.88em;
-    --ods-font-xs: 0.75em;
-    --ods-font-xxs: 0.69em;
+    --font-xxxl: 1.5em;
+    --font-xxl: 1.38em;
+    --font-xl: 1.25em;
+    --font-lg: 1.13em;
+    --font-md: 1em;
+    --font-sm: 0.88em;
+    --font-xs: 0.75em;
+    --font-xxs: 0.69em;
 
     /* Typography */
-    --ods-font-h1-size: 1.5em;
-    --ods-font-h1-line: 2.38em;
-    --ods-font-h2-size: 1.38em;
-    --ods-font-h2-line: 2.13em;
-    --ods-font-h3-size: 1.25em;
-    --ods-font-h3-line: 2em;
-    --ods-font-h4-size: 1.13em;
-    --ods-font-h4-line: 1.75em;
-    --ods-font-title1-size: 1em;
-    --ods-font-title1-line: 1.5em;
-    --ods-font-title2-size: 1em;
-    --ods-font-title2-line: 1.5em;
-    --ods-font-title3-size: 0.88em;
-    --ods-font-title3-line: 1.25em;
-    --ods-font-title4-size: 0.88em;
-    --ods-font-title4-line: 1.25em;
-    --ods-font-body1-size: 0.75em;
-    --ods-font-body1-line: 1.13em;
-    --ods-font-body2-size: 0.75em;
-    --ods-font-body2-line: 1.13em;
-    --ods-font-body3-size: 0.69em;
-    --ods-font-body3-line: 1em;
+    --font-h1-size: 1.5em;
+    --font-h1-line: 2.38em;
+    --font-h2-size: 1.38em;
+    --font-h2-line: 2.13em;
+    --font-h3-size: 1.25em;
+    --font-h3-line: 2em;
+    --font-h4-size: 1.13em;
+    --font-h4-line: 1.75em;
+    --font-title1-size: 1em;
+    --font-title1-line: 1.5em;
+    --font-title2-size: 1em;
+    --font-title2-line: 1.5em;
+    --font-title3-size: 0.88em;
+    --font-title3-line: 1.25em;
+    --font-title4-size: 0.88em;
+    --font-title4-line: 1.25em;
+    --font-body1-size: 0.75em;
+    --font-body1-line: 1.13em;
+    --font-body2-size: 0.75em;
+    --font-body2-line: 1.13em;
+    --font-body3-size: 0.69em;
+    --font-body3-line: 1em;
 
     /* Spacing */
-    --ods-space-xxxl: 3em;
-    --ods-space-xxl: 2em;
-    --ods-space-xl: 1.5em;
-    --ods-space-lg: 1.25em;
-    --ods-space-md: 1em;
-    --ods-space-sm: 0.75em;
-    --ods-space-xs: 0.5em;
-    --ods-space-xxs: 0.25em;
-    --ods-space-xxxs: 0.13em;
+    --space-xxxl: 3em;
+    --space-xxl: 2em;
+    --space-xl: 1.5em;
+    --space-lg: 1.25em;
+    --space-md: 1em;
+    --space-sm: 0.75em;
+    --space-xs: 0.5em;
+    --space-xxs: 0.25em;
+    --space-xxxs: 0.13em;
 
     /* Responsive layout */
-    --ods-layout-mobile: 375px;
-    --ods-layout-tablet: 768px;
-    --ods-layout-desktop: 1024px;
+    --layout-mobile: 375px;
+    --layout-tablet: 768px;
+    --layout-desktop: 1024px;
   }
 
   .markdown > * {
@@ -125,13 +125,13 @@
 
   body {
     /** header 요소의 height값 */
-    .ods-layout__header-height {
-      height: var(--ods-header-height);
+    .layout__header-height {
+      height: var(--header-height);
     }
 
     /** 레이아웃의 width 속성, body 컨텐츠의 min-width, max-width는 여기서 지정 **/
-    .ods-layout__width {
-      min-width: var(--ods-min-width);
+    .layout__width {
+      min-width: var(--min-width);
     }
 
     /**
@@ -139,9 +139,9 @@
       * padding: Layout.Header, Layout.Footer에서 사용 중
       * padding 값은 항상 같은 값을 유지해야 함
     **/
-    .ods-layout__padding {
-      padding-left: var(--ods-layout-padding);
-      padding-right: var(--ods-layout-padding);
+    .layout__padding {
+      padding-left: var(--layout-padding);
+      padding-right: var(--layout-padding);
     }
 
     /**
@@ -149,29 +149,29 @@
       * margin-top: Layout.Header와 Layout.Body 사이 간격 지정
       * margin-bottom: Layout.Body와 Layout.Footer 사이 간격 지정
     **/
-    .ods-body__padding {
-      padding-top: var(--ods-body-padding);
-      padding-bottom: var(--ods-body-padding);
+    .body__padding {
+      padding-top: var(--body-padding);
+      padding-bottom: var(--body-padding);
     }
 
-    /** drawer open 상태일 때 body가 밀려날 여백, .ods-drawer__drawer-width과 동일하게 지정 */
-    .ods-body__drawer-open-margin {
-      margin-left: var(--ods-drawer-width);
+    /** drawer open 상태일 때 body가 밀려날 여백, .drawer__drawer-width과 동일하게 지정 */
+    .body__drawer-open-margin {
+      margin-left: var(--drawer-width);
     }
 
     /** 레이아웃의 footer height **/
-    .ods-layout__footer-height {
-      height: var(--ods-footer-height);
+    .layout__footer-height {
+      height: var(--footer-height);
     }
 
-    /** drawer margin top 속성, ods-layout__header-height와 동일한 사이즈로 지정할 것 **/
-    .ods-drawer__margin-top {
-      margin-top: var(--ods-header-height);
+    /** drawer margin top 속성, layout__header-height와 동일한 사이즈로 지정할 것 **/
+    .drawer__margin-top {
+      margin-top: var(--header-height);
     }
 
     /** drawer width값 */
-    .ods-drawer__drawer-width {
-      width: var(--ods-drawer-width);
+    .drawer__drawer-width {
+      width: var(--drawer-width);
     }
   }
 }

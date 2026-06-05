@@ -93,7 +93,7 @@ export default defineConfig({
         interop: 'auto',
         assetFileNames(chunkInfo) {
           if (chunkInfo.name === 'style.css') {
-            return 'ods-style.css'; // 원하는 파일명으로 변경
+            return 'style.css'; // 원하는 파일명으로 변경
           }
           return chunkInfo.name ?? '';
         },

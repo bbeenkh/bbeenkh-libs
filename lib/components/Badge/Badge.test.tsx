@@ -30,14 +30,14 @@ describe('Badge', () => {
       expect(screen.queryByText('5')).not.toBeInTheDocument();
     });
 
-    it('size="default"일 때 ods-w-2 ods-h-2 클래스가 적용된다', () => {
+    it('size="default"일 때 w-2 h-2 클래스가 적용된다', () => {
       const { container } = render(<Badge type="dot" size="default" />);
-      expect(container.firstChild).toHaveClass('ods-w-2', 'ods-h-2');
+      expect(container.firstChild).toHaveClass('w-2', 'h-2');
     });
 
-    it('size="sm"일 때 ods-w-1 ods-h-1 클래스가 적용된다', () => {
+    it('size="sm"일 때 w-1 h-1 클래스가 적용된다', () => {
       const { container } = render(<Badge type="dot" size="sm" />);
-      expect(container.firstChild).toHaveClass('ods-w-1', 'ods-h-1');
+      expect(container.firstChild).toHaveClass('w-1', 'h-1');
     });
   });
 });

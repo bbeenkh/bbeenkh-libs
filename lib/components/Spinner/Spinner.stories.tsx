@@ -19,27 +19,27 @@ export default meta;
 
 export const DefaultExample = () => {
   return (
-    <div className="ods-flex ods-h-[60px] ods-w-full ods-gap-8 ods-items-center">
-      <div className="ods-h-full ods-flex-col ods-gap-8">
+    <div className="flex h-[60px] w-full gap-8 items-center">
+      <div className="h-full flex-col gap-8">
         <span>XS</span>
         <Spinner size="xs" />
       </div>
-      <div className="ods-h-full ods-flex-col ods-gap-8">
+      <div className="h-full flex-col gap-8">
         <span>SM</span>
-        <Spinner size="sm" className="ods-fill-state-info" />
+        <Spinner size="sm" className="fill-state-info" />
       </div>
-      <div className="ods-h-full ods-flex-col ods-gap-8">
+      <div className="h-full flex-col gap-8">
         <span>LG</span>
         <Spinner
           size="lg"
-          className="ods-fill-state-danger ods-text-state-info"
+          className="fill-state-danger text-state-info"
         />
       </div>
-      <div className="ods-h-full ods-flex-col ods-gap-8">
+      <div className="h-full flex-col gap-8">
         <span>XL</span>
         <Spinner
           size="xl"
-          className="ods-fill-state-warning ods-text-[green]"
+          className="fill-state-warning text-[green]"
         />
       </div>
     </div>
@@ -61,7 +61,7 @@ export const SpinnerInCard = () => {
       <Button styleClass={{ root: 'px-3 py-1 border rounded text-sm' }} onClick={load}>
         로딩 시작
       </Button>
-      <Card className="ods-justify-center ods-h-[10em]">
+      <Card className="justify-center h-[10em]">
         {isLoading ? (
           <Spinner size="xl" />
         ) : (

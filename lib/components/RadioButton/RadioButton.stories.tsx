@@ -46,9 +46,9 @@ export const RadioButtonGroup = () => {
   };
 
   return (
-    <div className="ods-w-full ods-flex ods-flex-col">
-      <h3 className="ods-text-black">value: {selectedValue}</h3>
-      <div className="ods-w-full ods-flex ods-justify-start ods-gap-3">
+    <div className="w-full flex flex-col">
+      <h3 className="text-black">value: {selectedValue}</h3>
+      <div className="w-full flex justify-start gap-3">
         <RadioButton
           id="option1"
           checked={selectedValue === 'option1'}
@@ -81,9 +81,9 @@ export const RadioButtonGroupWithHookForm = () => {
   const selectedValue = watch('radioGroup');
 
   return (
-    <div className="ods-w-full ods-flex ods-flex-col">
-      <h3 className="ods-text-black">value: {selectedValue}</h3>
-      <div className="ods-w-full ods-flex ods-justify-start ods-gap-3">
+    <div className="w-full flex flex-col">
+      <h3 className="text-black">value: {selectedValue}</h3>
+      <div className="w-full flex justify-start gap-3">
         <RadioButton
           id="option1"
           {...register('radioGroup')}

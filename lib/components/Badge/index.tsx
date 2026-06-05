@@ -29,9 +29,9 @@ export default function Badge({
   const typeClassName = useMemo(() => {
     switch (type) {
       case 'number':
-        return 'ods-min-w-4 ods-h-4 ods-px-1';
+        return 'min-w-4 h-4 px-1';
       case 'dot':
-        return size === 'default' ? 'ods-w-2 ods-h-2' : 'ods-w-1 ods-h-1';
+        return size === 'default' ? 'w-2 h-2' : 'w-1 h-1';
     }
   }, [type, size]);
 
@@ -44,12 +44,12 @@ export default function Badge({
   return (
     <div
       className={twMerge(
-        'ods-inline-flex ods-rounded-xl ods-bg-primary ods-items-center ods-justify-center',
+        'inline-flex rounded-xl bg-primary items-center justify-center',
         typeClassName,
       )}
     >
       {type !== 'dot' && (
-        <span className="ods-text-[0.6875em] ods-text-white ods-font-bold">
+        <span className="text-[0.6875em] text-white font-bold">
           {markPlusOver999()}
         </span>
       )}
