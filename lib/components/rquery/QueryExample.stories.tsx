@@ -1,13 +1,3 @@
-/**
- * React Query API 연동 패턴 예제 스토리
- *
- * api-react-query.md 패턴 기반:
- * - Service 메서드 (mock)
- * - Query Key Factory (createQueryKeys 패턴)
- * - useQuery / useMutation 사용
- * - 로딩 → Skeleton, 에러 → 재시도 버튼, 성공 → Card 렌더
- */
-
 import React from 'react';
 import { Meta } from '@storybook/react';
 import {
@@ -41,7 +31,7 @@ interface ICreateUserReq {
   role: IUser['role'];
 }
 
-// ─── Mock Service (APIService 패턴 참고) ──────────────────────────────────────
+// ─── Mock Service ─────────────────────────────────────────────────────────────
 
 const mockUsers: IUser[] = [
   { id: 1, name: '김철수', email: 'kim@example.com', role: '관리자' },
@@ -52,7 +42,6 @@ const mockUsers: IUser[] = [
 let mockDb = [...mockUsers];
 
 const UserService = {
-  /** GET /api/users — 사용자 목록 조회 */
   async getUserList(): Promise<IUserListRes> {
     await new Promise((r) => setTimeout(r, 1200));
     return {
@@ -61,7 +50,6 @@ const UserService = {
     };
   },
 
-  /** POST /api/users — 사용자 생성 */
   async createUser(payload: ICreateUserReq): Promise<IUser> {
     await new Promise((r) => setTimeout(r, 800));
     const newUser: IUser = { id: Date.now(), ...payload };
@@ -70,7 +58,7 @@ const UserService = {
   },
 };
 
-// ─── Query Key Factory (api-react-query.md §4-1 패턴) ─────────────────────────
+// ─── Query Key Factory ────────────────────────────────────────────────────────
 
 const userQueryFactory = {
   list: () => ({
@@ -105,9 +93,7 @@ function UserCard({ user }: { user: IUser }) {
   return (
     <Card className="p-4 flex-row items-center gap-4 rounded-lg">
       <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-        <span className="text-sm font-bold text-gray-600">
-          {user.name[0]}
-        </span>
+        <span className="text-sm font-bold text-gray-600">{user.name[0]}</span>
       </div>
       <Card.Body className="flex-col items-start flex-1 gap-0.5">
         <span className="text-sm font-bold text-gray-900">{user.name}</span>
@@ -115,9 +101,7 @@ function UserCard({ user }: { user: IUser }) {
       </Card.Body>
       <span
         className={`text-xs px-2 py-0.5 rounded-xl font-bold ${
-          user.role === '관리자'
-            ? 'bg-gray-900 text-white'
-            : 'bg-gray-100 text-gray-600'
+          user.role === '관리자' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600'
         }`}
       >
         {user.role}
@@ -144,14 +128,11 @@ function ErrorView({ onRetry }: { onRetry: () => void }) {
 
 function UserList() {
   const queryClient = useQueryClient();
-  const { data, isLoading, isError, refetch } = useQuery({
-    ...userQueryFactory.list(),
-  });
+  const { data, isLoading, isError, refetch } = useQuery({ ...userQueryFactory.list() });
 
   const { mutate: createUser, isPending } = useMutation({
     mutationFn: (payload: ICreateUserReq) => UserService.createUser(payload),
     onSuccess: () => {
-      // 목록 쿼리 무효화 → 자동 재조회
       queryClient.invalidateQueries({ queryKey: userQueryFactory.list().queryKey });
     },
   });
@@ -188,55 +169,10 @@ function UserList() {
   );
 }
 
-// ─── Stories ──────────────────────────────────────────────────────────────────
+// ─── Story ────────────────────────────────────────────────────────────────────
 
-/** 마운트 시 API 조회 → 스켈레톤 → 카드 목록 */
 export const FetchOnMount = () => {
-  // 스토리마다 독립 QueryClient 사용 (상태 격리)
   const client = new QueryClient();
-  return (
-    <QueryClientProvider client={client}>
-      <UserList />
-    </QueryClientProvider>
-  );
-};
-
-/** 로딩 상태 — Skeleton 표시 */
-export const LoadingState = () => {
-  const client = new QueryClient();
-  // queryFn이 절대 resolve되지 않아 영구 로딩 상태 유지
-  client.setQueryDefaults(userQueryFactory.list().queryKey, {
-    queryFn: () => new Promise(() => {}),
-  });
-  return (
-    <QueryClientProvider client={client}>
-      <UserList />
-    </QueryClientProvider>
-  );
-};
-
-/** 에러 상태 — 재시도 버튼 표시 */
-export const ErrorState = () => {
-  const client = new QueryClient({
-    defaultOptions: { queries: { retry: false } },
-  });
-  client.setQueryDefaults(userQueryFactory.list().queryKey, {
-    queryFn: () => Promise.reject(new Error('서버 오류 (500)')),
-  });
-  return (
-    <QueryClientProvider client={client}>
-      <UserList />
-    </QueryClientProvider>
-  );
-};
-
-/** 성공 상태 — 캐시에 데이터 미리 주입 */
-export const SuccessState = () => {
-  const client = new QueryClient();
-  client.setQueryData(userQueryFactory.list().queryKey, {
-    data: mockUsers,
-    meta: { total: mockUsers.length, current_page: 1, last_page: 1, per_page: 10 },
-  } satisfies IUserListRes);
   return (
     <QueryClientProvider client={client}>
       <UserList />
@@ -248,19 +184,5 @@ export const SuccessState = () => {
 
 const meta: Meta = {
   title: 'Examples/React Query API 연동',
-  parameters: {
-    docs: {
-      description: {
-        component: `
-api-react-query.md 패턴을 기반으로 한 API 연동 예제입니다.
-
-- **Service**: \`UserService.getUserList()\` / \`UserService.createUser()\`
-- **Query Factory**: \`userQueryFactory.list()\` → \`{ queryKey, queryFn }\`
-- **useQuery**: 로딩 → Skeleton, 에러 → 재시도 버튼, 성공 → Card 목록
-- **useMutation**: 사용자 추가 후 \`invalidateQueries\`로 목록 자동 갱신
-        `.trim(),
-      },
-    },
-  },
 };
 export default meta;
