@@ -39,7 +39,7 @@ interface Props {
  */
 export default function Fallback({ message, icon, styleClass }: Props) {
   return (
-    <div className={cn('flex flex-col items-center justify-center w-full min-h-screen', styleClass?.root)}>
+    <div className={cn('flex flex-col items-center justify-center w-full flex-1', styleClass?.root)}>
       {icon && (
         <div data-slot="icon" className={styleClass?.icon}>
           {icon}
