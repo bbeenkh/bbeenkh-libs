@@ -108,37 +108,21 @@ export default function App() {
               id="cb1"
               label="기본 체크박스"
               checked={checkboxChecked}
-              onChange={(e) => setCheckboxChecked(e.target.checked)}
+              onCheckedChange={setCheckboxChecked}
             />
             <Checkbox id="cb2" label="기본 체크됨" defaultChecked />
             <Checkbox id="cb3" label="비활성" disabled />
-            <Checkbox id="cb4" label="비활성 체크됨" disabled checked onChange={() => {}} />
+            <Checkbox id="cb4" label="비활성 체크됨" disabled checked />
           </Section>
 
           {/* RadioButton */}
           <Section title="RadioButton">
-            <RadioButton
-              id="rb1"
-              name="group"
-              label="옵션 A"
-              checked={radioValue === 'a'}
-              onChange={() => setRadioValue('a')}
-            />
-            <RadioButton
-              id="rb2"
-              name="group"
-              label="옵션 B"
-              checked={radioValue === 'b'}
-              onChange={() => setRadioValue('b')}
-            />
-            <RadioButton
-              id="rb3"
-              name="group"
-              label="옵션 C"
-              checked={radioValue === 'c'}
-              onChange={() => setRadioValue('c')}
-            />
-            <RadioButton id="rb4" name="group2" label="비활성" disabled />
+            <RadioButton.Group value={radioValue} onValueChange={setRadioValue} className="flex flex-row gap-4">
+              <RadioButton.Item value="a" id="rb1" label="옵션 A" />
+              <RadioButton.Item value="b" id="rb2" label="옵션 B" />
+              <RadioButton.Item value="c" id="rb3" label="옵션 C" />
+              <RadioButton.Item value="d" id="rb4" label="비활성" disabled />
+            </RadioButton.Group>
           </Section>
 
           {/* Card */}

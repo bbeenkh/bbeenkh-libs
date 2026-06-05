@@ -1,10 +1,5 @@
-/**
- * @file RadioButton/index.tsx
- * @author liam / liam@imnotpizzalib.com
- * @description 라디오버튼 컴포넌트
- */
-
-import React, { InputHTMLAttributes, forwardRef, useState } from 'react';
+import React from 'react';
+import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { twMerge } from 'tailwind-merge';
 
 const UncheckedIcon = () => (
@@ -29,70 +24,131 @@ const DisabledIcon = () => (
   </svg>
 );
 
-export interface IRadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
+// ─── RadioButton.Group ──────────────────────────────────────────────
+
+interface GroupProps extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {
+  className?: string;
+}
+
+/**
+ * # RadioButton.Group
+ * ---
+ * - Radix `RadioGroup.Root` 래퍼
+ * - `value` / `onValueChange`로 선택 상태를 제어한다
+ * - `defaultValue`로 비제어 모드도 지원
+ */
+const Group = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Root>,
+  GroupProps
+>(function Group({ className, children, ...props }, ref) {
+  return (
+    <RadioGroupPrimitive.Root
+      ref={ref}
+      className={twMerge('flex flex-col gap-xs', className)}
+      {...props}
+    >
+      {children}
+    </RadioGroupPrimitive.Root>
+  );
+});
+
+// ─── RadioButton.Item ───────────────────────────────────────────────
+
+interface ItemProps {
+  /** RadioGroup 내에서 이 항목을 식별하는 값 */
+  value: string;
+  id?: string;
   label?: string;
   className?: string;
+  disabled?: boolean;
   checkedIcon?: React.ReactNode;
   uncheckedIcon?: React.ReactNode;
   disabledIcon?: React.ReactNode;
 }
 
-function RadioButton(
+/**
+ * # RadioButton.Item
+ * ---
+ * - Radix `RadioGroup.Item` 래퍼
+ * - `RadioButton.Group` 안에서 사용해야 한다
+ * - `data-state="checked"` / `data-disabled` attribute로 아이콘 전환
+ */
+const Item = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Item>,
+  ItemProps
+>(function Item(
   {
-    className,
-    label,
+    value,
     id,
+    label,
+    className,
+    disabled,
     checkedIcon = <CheckedIcon />,
     uncheckedIcon = <UncheckedIcon />,
     disabledIcon = <DisabledIcon />,
-    onChange,
-    ...props
-  }: IRadioButtonProps,
-  ref: React.ForwardedRef<HTMLInputElement>,
+  },
+  ref,
 ) {
-  const isControlled = props.checked !== undefined;
-  const [internalChecked, setInternalChecked] = useState(props.defaultChecked ?? false);
-  const isChecked = isControlled ? !!props.checked : internalChecked;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isControlled) setInternalChecked(e.target.checked);
-    onChange?.(e);
-  };
-
-  const icon = props.disabled ? disabledIcon : isChecked ? checkedIcon : uncheckedIcon;
-
   return (
     <div
       className={twMerge(
         'inline-flex items-center gap-xs',
-        props.disabled ? 'cursor-default' : 'cursor-pointer',
+        disabled ? 'cursor-default' : 'cursor-pointer',
         className,
       )}
     >
-      <div className="relative w-5 h-5 shrink-0">
-        <input
-          type="radio"
-          {...props}
-          onChange={handleChange}
-          id={id}
-          ref={ref}
-          className={twMerge(
-            'absolute inset-0 w-full h-full opacity-0 z-10',
-            props.disabled ? 'cursor-default' : 'cursor-pointer',
-          )}
-        />
-        <div className="pointer-events-none">{icon}</div>
-      </div>
+      <RadioGroupPrimitive.Item
+        ref={ref}
+        id={id}
+        value={value}
+        disabled={disabled}
+        className="relative w-5 h-5 shrink-0 focus-visible:outline-none group"
+      >
+        {/* unchecked */}
+        <div className="w-full h-full group-data-[state=checked]:hidden group-data-[disabled]:hidden">
+          {uncheckedIcon}
+        </div>
+        {/* disabled */}
+        <div className="w-full h-full hidden group-data-[disabled]:block">
+          {disabledIcon}
+        </div>
+        {/* checked: Radix Indicator는 선택 상태일 때만 렌더링 */}
+        <RadioGroupPrimitive.Indicator className="absolute inset-0 w-full h-full">
+          {checkedIcon}
+        </RadioGroupPrimitive.Indicator>
+      </RadioGroupPrimitive.Item>
       {label && (
         <label
-          className={twMerge('text-black text-sm', props.disabled && 'text-gray-500')}
           htmlFor={id}
+          className={twMerge(
+            'text-black text-sm',
+            disabled ? 'cursor-default text-gray-500' : 'cursor-pointer',
+          )}
         >
           {label}
         </label>
       )}
     </div>
   );
-}
+});
 
-export default forwardRef(RadioButton);
+// ─── RadioButton ────────────────────────────────────────────────────
+
+/**
+ * # RadioButton UI
+ * ---
+ * - Radix UI `@radix-ui/react-radio-group` 기반 복합 컴포넌트
+ * - 접근성(키보드, 스크린리더) Radix가 처리
+ * - `RadioButton.Group`: 라디오 그룹 루트 (`value` / `onValueChange`)
+ * - `RadioButton.Item`: 개별 라디오 항목 (`value` prop으로 식별)
+ * ---
+ * @example
+ * <RadioButton.Group value={selected} onValueChange={setSelected}>
+ *   <RadioButton.Item value="a" id="rb-a" label="옵션 A" />
+ *   <RadioButton.Item value="b" id="rb-b" label="옵션 B" />
+ *   <RadioButton.Item value="c" id="rb-c" label="옵션 C" disabled />
+ * </RadioButton.Group>
+ */
+const RadioButton = { Group, Item };
+
+export default RadioButton;

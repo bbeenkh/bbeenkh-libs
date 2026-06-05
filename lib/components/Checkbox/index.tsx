@@ -1,10 +1,5 @@
-/**
- * @file Checkbox/index.tsx
- * @author liam / liam@imnotpizzalib.com
- * @description 체크박스 컴포넌트
- */
-
-import React, { InputHTMLAttributes, forwardRef, useState } from 'react';
+import React from 'react';
+import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { twMerge } from 'tailwind-merge';
 
 const UncheckedIcon = () => (
@@ -29,71 +24,90 @@ const DisabledIcon = () => (
   </svg>
 );
 
-export interface ICheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface ICheckboxProps {
   id: string;
   label?: string;
   className?: string;
+  /** 제어 컴포넌트용 checked 값 */
+  checked?: boolean;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  onCheckedChange?: (checked: boolean) => void;
   checkedIcon?: React.ReactNode;
   uncheckedIcon?: React.ReactNode;
   disabledIcon?: React.ReactNode;
 }
 
-function Checkbox(
+/**
+ * # Checkbox UI
+ * ---
+ * - Radix UI `@radix-ui/react-checkbox` 기반 체크박스 컴포넌트
+ * - 접근성(키보드, 스크린리더) Radix가 처리
+ * - `checked` / `onCheckedChange` — 제어 컴포넌트
+ * - `defaultChecked` — 비제어 컴포넌트
+ * - `checkedIcon` / `uncheckedIcon` / `disabledIcon` — 커스텀 아이콘 주입 가능
+ */
+const Checkbox = React.forwardRef<
+  React.ElementRef<typeof CheckboxPrimitive.Root>,
+  ICheckboxProps
+>(function Checkbox(
   {
-    className,
-    label,
     id,
+    label,
+    className,
+    checked,
+    defaultChecked,
+    disabled,
+    onCheckedChange,
     checkedIcon = <CheckedIcon />,
     uncheckedIcon = <UncheckedIcon />,
     disabledIcon = <DisabledIcon />,
-    onChange,
-    ...props
-  }: ICheckboxProps,
-  ref: React.ForwardedRef<HTMLInputElement>,
+  },
+  ref,
 ) {
-  const isControlled = props.checked !== undefined;
-  const [internalChecked, setInternalChecked] = useState(props.defaultChecked ?? false);
-  const isChecked = isControlled ? !!props.checked : internalChecked;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isControlled) setInternalChecked(e.target.checked);
-    onChange?.(e);
-  };
-
-  const icon = props.disabled ? disabledIcon : isChecked ? checkedIcon : uncheckedIcon;
-
   return (
     <div
       className={twMerge(
         'inline-flex items-center gap-xs',
-        props.disabled ? 'cursor-default' : 'cursor-pointer',
+        disabled ? 'cursor-default' : 'cursor-pointer',
         className,
       )}
     >
-      <div className="relative w-5 h-5 shrink-0">
-        <input
-          type="checkbox"
-          {...props}
-          onChange={handleChange}
-          id={id}
-          ref={ref}
-          className={twMerge(
-            'absolute inset-0 w-full h-full opacity-0 z-10',
-            props.disabled ? 'cursor-default' : 'cursor-pointer',
-          )}
-        />
-        <div className="pointer-events-none">{icon}</div>
-      </div>
+      <CheckboxPrimitive.Root
+        ref={ref}
+        id={id}
+        checked={checked}
+        defaultChecked={defaultChecked}
+        disabled={disabled}
+        onCheckedChange={(val) => onCheckedChange?.(val === true)}
+        className="relative w-5 h-5 shrink-0 focus-visible:outline-none group"
+      >
+        {/* unchecked / disabled: Indicator가 없을 때(unchecked) 표시 */}
+        <div className="w-full h-full group-data-[state=checked]:hidden group-data-[disabled]:hidden">
+          {uncheckedIcon}
+        </div>
+        {/* disabled */}
+        <div className="w-full h-full hidden group-data-[disabled]:block">
+          {disabledIcon}
+        </div>
+        {/* checked: Radix Indicator는 checked 상태일 때만 렌더링 */}
+        <CheckboxPrimitive.Indicator className="absolute inset-0 w-full h-full">
+          {checkedIcon}
+        </CheckboxPrimitive.Indicator>
+      </CheckboxPrimitive.Root>
       {label && (
         <label
-          className={twMerge('text-black text-sm', props.disabled && 'text-gray-500')}
           htmlFor={id}
+          className={twMerge(
+            'text-black text-sm',
+            disabled ? 'cursor-default text-gray-500' : 'cursor-pointer',
+          )}
         >
           {label}
         </label>
       )}
     </div>
   );
-}
+});
 
-export default forwardRef(Checkbox);
+export default Checkbox;

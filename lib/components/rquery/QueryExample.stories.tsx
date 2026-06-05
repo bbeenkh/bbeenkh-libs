@@ -75,14 +75,14 @@ function UserListSkeleton() {
       {[1, 2, 3].map((i) => (
         <Skeleton.Container
           key={i}
-          styleClass={{ root: 'flex items-center gap-4 p-4 border border-gray-200 rounded-lg' }}
+          styleClass={{ root: 'flex items-center gap-4 p-4 bg-gray-50 border border-gray-100 rounded-lg' }}
         >
-          <Skeleton.Circle styleClass={{ root: 'w-10 h-10 rounded-full bg-gray-200 animate-pulse shrink-0' }} />
+          <Skeleton.Circle styleClass={{ root: 'w-10 h-10 rounded-full bg-gray-200/80 animate-pulse shrink-0' }} />
           <div className="flex flex-col gap-2 flex-1">
-            <Skeleton.Box styleClass={{ root: 'h-4 w-1/3 rounded bg-gray-200 animate-pulse' }} />
-            <Skeleton.Box styleClass={{ root: 'h-3 w-1/2 rounded bg-gray-200 animate-pulse' }} />
+            <Skeleton.Box styleClass={{ root: 'h-4 w-1/3 rounded bg-gray-200/80 animate-pulse' }} />
+            <Skeleton.Box styleClass={{ root: 'h-3 w-1/2 rounded bg-gray-200/60 animate-pulse' }} />
           </div>
-          <Skeleton.Box styleClass={{ root: 'h-5 w-12 rounded-xl bg-gray-200 animate-pulse' }} />
+          <Skeleton.Box styleClass={{ root: 'h-5 w-12 rounded-xl bg-gray-200/80 animate-pulse' }} />
         </Skeleton.Container>
       ))}
     </div>

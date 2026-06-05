@@ -4,7 +4,6 @@ import ODSRadioButton from '@/components/RadioButton';
 import ODSButton from './components/Button';
 import ODSCard from './components/Card';
 import ODSInput from './components/Input';
-import ODSPagination from './components/Pagination';
 import ODSSkeleton from './components/Skeleton';
 import ODSFallback from './components/Fallback';
 
@@ -13,7 +12,6 @@ export const RadioButton = ODSRadioButton;
 export const Button = ODSButton;
 export const Card = ODSCard;
 export const Input = ODSInput;
-export const Pagination = ODSPagination;
 export const Skeleton = ODSSkeleton;
 export const Fallback = ODSFallback;
 
