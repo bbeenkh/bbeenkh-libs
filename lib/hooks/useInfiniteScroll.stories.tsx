@@ -17,8 +17,8 @@ const InfiniteScrollDemo = ({ maxPages = 5 }: { maxPages?: number }) => {
 
   const hasNextPage = page < maxPages;
 
-  const { ref } = useInfiniteScroll({
-    onIntersect: () => {
+  const { InfiniteScrollWrapper } = useInfiniteScroll({
+    onTriggered: () => {
       setIsLoading(true);
       setTimeout(() => {
         const next = page + 1;
@@ -33,18 +33,21 @@ const InfiniteScrollDemo = ({ maxPages = 5 }: { maxPages?: number }) => {
 
   return (
     <div className="max-w-sm mx-auto p-4 border rounded-lg h-[400px] overflow-y-auto">
-      <ul className="flex flex-col gap-2">
+      <InfiniteScrollWrapper
+        thresholdUI={
+          isLoading ? (
+            <p className="text-center text-sm text-gray-500">로딩 중...</p>
+          ) : !hasNextPage ? (
+            <p className="text-center text-sm text-gray-500">모든 항목을 불러왔습니다.</p>
+          ) : null
+        }
+      >
         {items.map((item) => (
-          <li key={item.id} className="p-3 bg-gray-100 rounded text-sm">
+          <div key={item.id} className="p-3 bg-gray-100 rounded text-sm">
             {item.label}
-          </li>
+          </div>
         ))}
-      </ul>
-
-      <div ref={ref} className="py-4 text-center text-sm text-gray-500">
-        {isLoading && '로딩 중...'}
-        {!isLoading && !hasNextPage && '모든 항목을 불러왔습니다.'}
-      </div>
+      </InfiniteScrollWrapper>
     </div>
   );
 };
