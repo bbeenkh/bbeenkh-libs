@@ -1,4 +1,5 @@
 import React from 'react';
+import { cn } from '../../utils/cn';
 
 interface StyleClass {
   root?: string;
@@ -38,7 +39,7 @@ interface Props {
  */
 export default function Fallback({ message, icon, styleClass }: Props) {
   return (
-    <div className={styleClass?.root}>
+    <div className={cn('flex flex-col items-center justify-center w-full min-h-screen', styleClass?.root)}>
       {icon && (
         <div data-slot="icon" className={styleClass?.icon}>
           {icon}
