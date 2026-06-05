@@ -5,13 +5,23 @@ vi.mock('react-intersection-observer', () => ({
   useInView: vi.fn(),
 }));
 
-import { useInView } from 'react-intersection-observer';
+import { useInView, type InViewHookResponse } from 'react-intersection-observer';
 
 const mockUseInView = vi.mocked(useInView);
 const mockRef = vi.fn();
 
+/** InViewHookResponse는 object + 튜플 하이브리드 타입이므로 양쪽 모두 충족하는 mock 생성 */
+function makeInViewResponse(inView: boolean): InViewHookResponse {
+  const tuple = Object.assign([mockRef, inView, undefined] as [typeof mockRef, boolean, undefined], {
+    ref: mockRef,
+    inView,
+    entry: undefined,
+  });
+  return tuple as unknown as InViewHookResponse;
+}
+
 beforeEach(() => {
-  mockUseInView.mockReturnValue({ ref: mockRef, inView: false, entry: undefined });
+  mockUseInView.mockReturnValue(makeInViewResponse(false));
 });
 
 describe('useInfiniteScroll', () => {
@@ -65,7 +75,7 @@ describe('useInfiniteScroll', () => {
 
   describe('onTriggered 호출 조건', () => {
     it('뷰포트에 진입하면 onTriggered를 호출한다', () => {
-      mockUseInView.mockReturnValue({ ref: mockRef, inView: true, entry: undefined });
+      mockUseInView.mockReturnValue(makeInViewResponse(true));
       const onTriggered = vi.fn();
 
       renderHook(() => useInfiniteScroll({ onTriggered }));
@@ -74,7 +84,7 @@ describe('useInfiniteScroll', () => {
     });
 
     it('isLoading이 true이면 뷰포트 진입 시에도 onTriggered를 호출하지 않는다', () => {
-      mockUseInView.mockReturnValue({ ref: mockRef, inView: true, entry: undefined });
+      mockUseInView.mockReturnValue(makeInViewResponse(true));
       const onTriggered = vi.fn();
 
       renderHook(() => useInfiniteScroll({ onTriggered, isLoading: true }));
@@ -83,7 +93,7 @@ describe('useInfiniteScroll', () => {
     });
 
     it('hasNextPage가 false이면 뷰포트 진입 시에도 onTriggered를 호출하지 않는다', () => {
-      mockUseInView.mockReturnValue({ ref: mockRef, inView: true, entry: undefined });
+      mockUseInView.mockReturnValue(makeInViewResponse(true));
       const onTriggered = vi.fn();
 
       renderHook(() => useInfiniteScroll({ onTriggered, hasNextPage: false }));
@@ -92,7 +102,7 @@ describe('useInfiniteScroll', () => {
     });
 
     it('뷰포트에 진입하지 않으면 onTriggered를 호출하지 않는다', () => {
-      mockUseInView.mockReturnValue({ ref: mockRef, inView: false, entry: undefined });
+      mockUseInView.mockReturnValue(makeInViewResponse(false));
       const onTriggered = vi.fn();
 
       renderHook(() => useInfiniteScroll({ onTriggered }));
