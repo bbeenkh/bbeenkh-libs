@@ -14,7 +14,24 @@ interface ILayoutProps {
 }
 
 /**
- * dialog Layout UI
+ * # Card UI
+ * ---
+ * - 흰 배경 + 테두리 + 둥근 모서리로 구성된 카드 레이아웃 컴포넌트 (Compound Component 패턴)
+ * - `Card.Header`: 헤더 영역 (`justify-between` 가로 배치)
+ * - `Card.Title`: 카드 제목 텍스트
+ * - `Card.Body`: 본문 콘텐츠 영역
+ * - `Card.Footer`: 하단 고정 푸터 (absolute 배치)
+ * ---
+ * @param className - 추가 Tailwind 클래스
+ * @param children - 카드 내부 콘텐츠
+ * @example
+ * <Card className="max-w-sm">
+ *   <Card.Header>
+ *     <Card.Title>제목</Card.Title>
+ *   </Card.Header>
+ *   <Card.Body>본문 내용</Card.Body>
+ *   <Card.Footer>푸터</Card.Footer>
+ * </Card>
  */
 const Card = ({ className, children }: ILayoutProps) => (
   <section

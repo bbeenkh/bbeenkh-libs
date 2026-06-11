@@ -2,6 +2,32 @@ import * as React from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { cn } from '@/utils/cn';
 
+/**
+ * # DropdownMenu UI
+ * ---
+ * - Radix UI `@radix-ui/react-dropdown-menu` 기반 드롭다운 메뉴 복합 컴포넌트
+ * - `DropdownMenu`: 루트 컨테이너
+ * - `DropdownMenuTrigger`: 드롭다운을 여는 트리거 버튼
+ * - `DropdownMenuContent`: 메뉴 콘텐츠 패널 (Portal 렌더링, `sideOffset` 기본값 4px)
+ * - `DropdownMenuItem`: 일반 메뉴 항목. `inset` prop으로 좌측 패딩 추가 가능
+ * - `DropdownMenuCheckboxItem`: 체크박스 메뉴 항목
+ * - `DropdownMenuRadioGroup` + `DropdownMenuRadioItem`: 라디오 그룹 메뉴 항목
+ * - `DropdownMenuSub` + `DropdownMenuSubTrigger` + `DropdownMenuSubContent`: 중첩 서브메뉴
+ * - `DropdownMenuLabel`: 메뉴 그룹 레이블 (비선택)
+ * - `DropdownMenuSeparator`: 항목 간 구분선
+ * - `DropdownMenuShortcut`: 단축키 표시 텍스트 (우측 정렬)
+ * ---
+ * @example
+ * <DropdownMenu>
+ *   <DropdownMenuTrigger>메뉴 열기</DropdownMenuTrigger>
+ *   <DropdownMenuContent>
+ *     <DropdownMenuLabel>계정</DropdownMenuLabel>
+ *     <DropdownMenuSeparator />
+ *     <DropdownMenuItem>프로필</DropdownMenuItem>
+ *     <DropdownMenuItem>로그아웃</DropdownMenuItem>
+ *   </DropdownMenuContent>
+ * </DropdownMenu>
+ */
 const DropdownMenu = DropdownMenuPrimitive.Root;
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 const DropdownMenuGroup = DropdownMenuPrimitive.Group;

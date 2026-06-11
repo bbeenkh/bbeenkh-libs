@@ -2,6 +2,32 @@ import * as React from 'react';
 import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
 import { cn } from '@/utils/cn';
 
+/**
+ * # ContextMenu UI
+ * ---
+ * - Radix UI `@radix-ui/react-context-menu` 기반 우클릭 컨텍스트 메뉴 복합 컴포넌트
+ * - `ContextMenu`: 루트. 우클릭 트리거 영역을 감싼다
+ * - `ContextMenuTrigger`: 우클릭을 감지할 영역
+ * - `ContextMenuContent`: 메뉴 콘텐츠 패널 (Portal 렌더링, 애니메이션 포함)
+ * - `ContextMenuItem`: 일반 메뉴 항목. `inset` prop으로 좌측 패딩 추가 가능
+ * - `ContextMenuCheckboxItem`: 체크박스 메뉴 항목
+ * - `ContextMenuRadioGroup` + `ContextMenuRadioItem`: 라디오 그룹 메뉴 항목
+ * - `ContextMenuSub` + `ContextMenuSubTrigger` + `ContextMenuSubContent`: 중첩 서브메뉴
+ * - `ContextMenuLabel`: 메뉴 그룹 레이블 (비선택)
+ * - `ContextMenuSeparator`: 항목 간 구분선
+ * - `ContextMenuShortcut`: 단축키 표시 텍스트 (우측 정렬)
+ * ---
+ * @example
+ * <ContextMenu>
+ *   <ContextMenuTrigger>우클릭 영역</ContextMenuTrigger>
+ *   <ContextMenuContent>
+ *     <ContextMenuItem>열기</ContextMenuItem>
+ *     <ContextMenuItem>복사</ContextMenuItem>
+ *     <ContextMenuSeparator />
+ *     <ContextMenuItem>삭제</ContextMenuItem>
+ *   </ContextMenuContent>
+ * </ContextMenu>
+ */
 const ContextMenu = ContextMenuPrimitive.Root;
 const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
 const ContextMenuGroup = ContextMenuPrimitive.Group;
