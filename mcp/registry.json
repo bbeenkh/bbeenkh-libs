@@ -1,0 +1,123 @@
+{
+  "Accordion": {
+    "description": "펼침/접힘 아코디언. type=\"single\"|\"multiple\" 지원",
+    "files": [
+      "lib/components/Accordion/index.tsx",
+      "lib/utils/cn.ts"
+    ],
+    "deps": ["@radix-ui/react-accordion", "classnames", "tailwind-merge"]
+  },
+  "Anim": {
+    "description": "framer-motion 기반 Fade/ScaleFade 애니메이션 래퍼",
+    "files": ["lib/components/Anim/index.tsx"],
+    "deps": ["framer-motion", "tailwind-merge"]
+  },
+  "Button": {
+    "description": "스타일 없는 버튼. asChild로 Radix Slot 패턴 지원",
+    "files": ["lib/components/Button/index.tsx"],
+    "deps": ["@radix-ui/react-slot"]
+  },
+  "Card": {
+    "description": "흰 배경 카드 레이아웃. Card.Header/.Title/.Body/.Footer",
+    "files": ["lib/components/Card/index.tsx"],
+    "deps": ["tailwind-merge"]
+  },
+  "CardUI": {
+    "description": "shadcn 스타일 카드. CardHeader/Title/Description/Action/Content/Footer",
+    "files": [
+      "lib/components/CardUI/index.tsx",
+      "lib/utils/cn.ts"
+    ],
+    "deps": ["classnames", "tailwind-merge"]
+  },
+  "Checkbox": {
+    "description": "커스텀 아이콘 주입 가능 체크박스. 제어/비제어 모드 지원",
+    "files": ["lib/components/Checkbox/index.tsx"],
+    "deps": ["@radix-ui/react-checkbox", "tailwind-merge"]
+  },
+  "ContextMenu": {
+    "description": "우클릭 컨텍스트 메뉴. 서브메뉴/체크박스/라디오 항목 지원",
+    "files": [
+      "lib/components/ContextMenu/index.tsx",
+      "lib/utils/cn.ts"
+    ],
+    "deps": ["@radix-ui/react-context-menu", "classnames", "tailwind-merge"]
+  },
+  "DropdownMenu": {
+    "description": "버튼 트리거 드롭다운 메뉴. 서브메뉴/체크박스/라디오 항목 지원",
+    "files": [
+      "lib/components/DropdownMenu/index.tsx",
+      "lib/utils/cn.ts"
+    ],
+    "deps": ["@radix-ui/react-dropdown-menu", "classnames", "tailwind-merge"]
+  },
+  "Fallback": {
+    "description": "빈 상태(empty state) 표시. 아이콘 + 메시지 조합",
+    "files": [
+      "lib/components/Fallback/index.tsx",
+      "lib/utils/cn.ts"
+    ],
+    "deps": ["classnames", "tailwind-merge"]
+  },
+  "Input": {
+    "description": "prefix/suffix 슬롯, onEnter 콜백 지원 입력 필드",
+    "files": ["lib/components/Input/index.tsx"],
+    "deps": ["tailwind-merge"]
+  },
+  "Layout": {
+    "description": "페이지 루트 레이아웃. Layout.Header/.Body/.Footer",
+    "files": ["lib/components/Layout/index.tsx"],
+    "deps": []
+  },
+  "Modal": {
+    "description": "Radix Dialog 기반 모달. 크기 md/lg/xl, ErrorBoundary 내장",
+    "files": ["lib/components/Modal/index.tsx"],
+    "deps": ["@radix-ui/react-dialog", "react-error-boundary", "tailwind-merge"]
+  },
+  "Popover": {
+    "description": "Radix Popover 기반 팝오버. Root/Trigger/Content/Arrow/Close",
+    "files": ["lib/components/Popover/index.tsx"],
+    "deps": ["@radix-ui/react-popover", "tailwind-merge"]
+  },
+  "RadioButton": {
+    "description": "라디오 그룹. RadioButton.Group + RadioButton.Item",
+    "files": ["lib/components/RadioButton/index.tsx"],
+    "deps": ["@radix-ui/react-radio-group", "tailwind-merge"]
+  },
+  "Selectbox": {
+    "description": "options 배열 주입 방식 선택 박스",
+    "files": ["lib/components/Selectbox/index.tsx"],
+    "deps": ["@radix-ui/react-select"]
+  },
+  "Separator": {
+    "description": "수평/수직 구분선. orientation prop으로 방향 지정",
+    "files": ["lib/components/Separator/index.tsx"],
+    "deps": ["@radix-ui/react-separator", "tailwind-merge"]
+  },
+  "Skeleton": {
+    "description": "로딩 플레이스홀더. Skeleton.Box/.Circle/.Container",
+    "files": ["lib/components/Skeleton/index.tsx"],
+    "deps": []
+  },
+  "Spinner": {
+    "description": "SVG 스피너. xs/sm/lg/xl 사이즈 (SVGR 설정 필요)",
+    "files": ["lib/components/Spinner/index.tsx"],
+    "deps": ["tailwind-merge"],
+    "note": "lib/assets/svgs/spinner-icon.svg 파일과 타겟 프로젝트의 SVGR 플러그인 설정이 필요합니다."
+  },
+  "SwitchButton": {
+    "description": "토글 스위치. 기본 스타일 포함, styleClass로 커스터마이즈",
+    "files": ["lib/components/SwitchButton/index.tsx"],
+    "deps": ["@radix-ui/react-switch", "tailwind-merge"]
+  },
+  "Tab": {
+    "description": "탭 UI. Tab.Root/List/Trigger/Content",
+    "files": ["lib/components/Tab/index.tsx"],
+    "deps": ["@radix-ui/react-tabs"]
+  },
+  "Toast": {
+    "description": "알림 토스트. Toast.Provider로 앱 루트에서 감싸서 사용",
+    "files": ["lib/components/Toast/index.tsx"],
+    "deps": ["@radix-ui/react-toast"]
+  }
+}
