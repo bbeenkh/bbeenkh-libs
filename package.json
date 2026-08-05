@@ -39,7 +39,8 @@
     "lint": "eslint .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "analyze": "npx vite-bundle-visualizer"
+    "analyze": "npx vite-bundle-visualizer",
+    "svg": "npx run svgr"
   },
   "dependencies": {
     "@lukemorales/query-key-factory": "^1.3.4",
