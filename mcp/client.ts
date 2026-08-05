@@ -99,7 +99,7 @@ await client.connect(transport);
 const result = await client.callTool({
   name: "hearts", // tool 이름
   arguments: {
-    text: "AAAAAAAAAAAAAAAAAAAA", // 전달할 파라미터 (text: string)
+    text: "어휴 mcp 드디어 만들엇슴", // 전달할 파라미터 (text: string)
   },
 });
 
