@@ -18,7 +18,7 @@ Claude Code(또는 MCP 호환 IDE)에서 `list_components` / `add_component` 툴
 bbeenkh-libs/
 └── mcp/
     ├── index.ts          ← MCP 서버 진입점 (stdio transport)
-    ├── registry.json     ← 컴포넌트별 files + deps 메타데이터
+    ├── component-desc.json     ← 컴포넌트별 files + deps 메타데이터
     └── package.json      ← MCP 서버 전용 의존성
 ```
 
@@ -27,7 +27,7 @@ bbeenkh-libs/
 
 ---
 
-## registry.json Schema
+## component-desc.json Schema
 
 ```ts
 type Registry = Record<string, ComponentEntry>;
@@ -75,7 +75,7 @@ interface ComponentEntry {
 
 **실행 순서:**
 
-1. `registry.json`에서 `name`에 해당하는 항목 조회 → 없으면 에러 반환
+1. `component-desc.json`에서 `name`에 해당하는 항목 조회 → 없으면 에러 반환
 2. `<target_dir>/<ComponentName>/` 디렉토리 생성 (이미 존재하면 덮어씀)
 3. `files` 목록의 각 파일을 `<target_dir>/<ComponentName>/` 에 복사
 4. 타겟 프로젝트 루트(= `target_dir`를 역방향 탐색해서 `package.json` 위치) 감지

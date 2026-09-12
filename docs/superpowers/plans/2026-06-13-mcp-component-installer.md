@@ -4,7 +4,7 @@
 
 **Goal:** `bbeenkh-libs` 컴포넌트를 다른 프로젝트에 파일 복사 + 패키지 설치로 추가하는 로컬 MCP 서버 구축
 
-**Architecture:** `mcp/` 폴더를 독립 Node.js 앱으로 구성. `registry.json`에 컴포넌트별 파일 경로·의존성을 정의하고, `index.ts`가 `list_components` / `add_component` 두 MCP 툴을 노출. stdio transport로 Claude Code에 등록.
+**Architecture:** `mcp/` 폴더를 독립 Node.js 앱으로 구성. `component-desc.json`에 컴포넌트별 파일 경로·의존성을 정의하고, `index.ts`가 `list_components` / `add_component` 두 MCP 툴을 노출. stdio transport로 Claude Code에 등록.
 
 **Tech Stack:** `@modelcontextprotocol/sdk`, `tsx` (빌드 없이 TS 직접 실행), Node.js fs/child_process
 
@@ -16,7 +16,7 @@
 |------|------|
 | `mcp/package.json` | MCP 서버 전용 의존성 |
 | `mcp/tsconfig.json` | TypeScript 설정 |
-| `mcp/registry.json` | 컴포넌트 → files + deps 매핑 |
+| `mcp/component-desc.json` | 컴포넌트 → files + deps 매핑 |
 | `mcp/index.ts` | MCP 서버 진입점 (두 툴 구현) |
 | `~/.claude/settings.json` | Claude Code MCP 등록 |
 
@@ -81,16 +81,16 @@ git commit -m "chore: MCP 서버 패키지 설정 추가"
 
 ---
 
-## Task 2: registry.json 작성
+## Task 2: component-desc.json 작성
 
 **Files:**
-- Create: `mcp/registry.json`
+- Create: `mcp/component-desc.json`
 
 > **파일 경로 규칙:**
 > - `lib/components/X/...` → 복사 시 `<target_dir>/X/...`
 > - `lib/utils/...` → 복사 시 `<target_dir>/utils/...`
 
-- [ ] **Step 1: `mcp/registry.json` 작성**
+- [ ] **Step 1: `mcp/component-desc.json` 작성**
 
 ```json
 {
@@ -221,7 +221,7 @@ git commit -m "chore: MCP 서버 패키지 설정 추가"
 - [ ] **Step 2: 커밋**
 
 ```bash
-git add mcp/registry.json
+git add mcp/component-desc.json
 git commit -m "chore: MCP 컴포넌트 레지스트리 추가"
 ```
 
@@ -259,7 +259,7 @@ interface ComponentEntry {
 type Registry = Record<string, ComponentEntry>;
 
 function loadRegistry(): Registry {
-  const registryPath = path.join(__dirname, 'registry.json');
+  const registryPath = path.join(__dirname, 'component-desc.json');
   return JSON.parse(fs.readFileSync(registryPath, 'utf-8')) as Registry;
 }
 

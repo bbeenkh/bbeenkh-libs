@@ -3,13 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "server": "tsx server.ts",
-    "client": "tsx client.ts"
+    "server": "tsx server.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.115.0",
-    "@modelcontextprotocol/sdk": "^1.0.0",
-    "dotenv": "^17.4.2"
+    "@modelcontextprotocol/sdk": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
