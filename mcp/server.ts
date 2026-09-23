@@ -75,155 +75,12 @@ async function readRepoDeps(): Promise<{
 }
 
 function getTemplates(
-  mode: 'consumer' | 'standalone',
   name: string,
   deps: { dependencies: Record<string, string>; devDependencies: Record<string, string> },
 ): Record<string, string> {
   const pick = (keys: string[], from: Record<string, string>) =>
     Object.fromEntries(keys.filter((k) => k in from).map((k) => [k, from[k]]));
 
-  if (mode === 'consumer') {
-    return {
-      'package.json': JSON.stringify(
-        {
-          name,
-          version: '0.1.0',
-          private: true,
-          type: 'module',
-          scripts: {
-            dev: 'vite',
-            build: 'tsc && vite build',
-            preview: 'vite preview',
-            lint: 'eslint .',
-          },
-          dependencies: {
-            '@imnotpizza/imnotpizza-libs': 'latest',
-            react: deps.dependencies['react'] ?? '^19.2.0',
-            'react-dom': deps.dependencies['react-dom'] ?? '^19.2.0',
-          },
-          devDependencies: {
-            '@types/react': deps.devDependencies['@types/react'] ?? '^19.0.0',
-            '@types/react-dom': deps.devDependencies['@types/react-dom'] ?? '^19.0.0',
-            '@vitejs/plugin-react': deps.devDependencies['@vitejs/plugin-react'] ?? '^4.2.1',
-            autoprefixer: deps.devDependencies['autoprefixer'] ?? '^10.4.17',
-            postcss: deps.devDependencies['postcss'] ?? '^8.4.33',
-            tailwindcss: deps.devDependencies['tailwindcss'] ?? '^3.4.1',
-            typescript: deps.devDependencies['typescript'] ?? '^5.7.3',
-            vite: deps.devDependencies['vite'] ?? '^5.0.8',
-          },
-        },
-        null,
-        2,
-      ),
-
-      'tsconfig.json': JSON.stringify(
-        {
-          compilerOptions: {
-            target: 'ES2020',
-            lib: ['DOM', 'DOM.Iterable', 'ESNext'],
-            module: 'ESNext',
-            moduleResolution: 'bundler',
-            jsx: 'react-jsx',
-            strict: true,
-            skipLibCheck: true,
-            noEmit: true,
-            isolatedModules: true,
-            esModuleInterop: true,
-            resolveJsonModule: true,
-          },
-          include: ['src'],
-        },
-        null,
-        2,
-      ),
-
-      'vite.config.ts': `import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-
-export default defineConfig({
-  plugins: [react()],
-});
-`,
-
-      'tailwind.config.js': `/** @type {import('tailwindcss').Config} */
-export default {
-  presets: [require('@imnotpizza/imnotpizza-libs/preset')],
-  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
-};
-`,
-
-      'postcss.config.js': `export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-};
-`,
-
-      '.prettierrc': JSON.stringify(
-        {
-          printWidth: 80,
-          tabWidth: 2,
-          singleQuote: true,
-          useTabs: false,
-          trailingComma: 'all',
-          bracketSpacing: true,
-          semi: true,
-        },
-        null,
-        2,
-      ),
-
-      'index.html': `<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${name}</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
-`,
-
-      'src/main.tsx': `import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import '@imnotpizza/imnotpizza-libs/style';
-import './index.css';
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
-`,
-
-      'src/App.tsx': `import { Button } from '@imnotpizza/imnotpizza-libs';
-
-function App() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <Button styleClass={{ root: 'bg-primary text-white px-4 py-2 rounded' }}>
-        시작하기
-      </Button>
-    </div>
-  );
-}
-
-export default App;
-`,
-
-      'src/index.css': `@tailwind base;
-@tailwind components;
-@tailwind utilities;
-`,
-    };
-  }
-
-  // standalone mode
   const appDeps = pick(
     [
       'react',
@@ -426,6 +283,14 @@ export default {
 };
 `,
 
+    '.gitignore': `node_modules/
+dist/
+.env
+.env.*
+.env.local
+*.log
+`,
+
     'index.html': `<!doctype html>
 <html lang="ko">
   <head>
@@ -452,10 +317,43 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 `,
 
-    'src/App.tsx': `function App() {
+    'src/App.tsx': `import { useState, type FormEvent } from 'react';
+import { cn } from './utils/cn';
+
+function App() {
+  const [name, setName] = useState('');
+  const [submitted, setSubmitted] = useState('');
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setSubmitted(name);
+    setName('');
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1 className="text-2xl font-bold">Hello, ${name}</h1>
+    <div className="min-h-screen flex flex-col">
+      <header className="bg-gray-100 sticky top-0 p-4">
+        <h1 className="text-xl font-bold">폼 예제</h1>
+      </header>
+      <main className="flex-1 p-6">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
+          <input
+            placeholder="이름을 입력하세요"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={cn('border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none')}
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:opacity-80"
+          >
+            제출
+          </button>
+          {submitted && (
+            <p className="text-sm text-green-600">제출됨: {submitted}</p>
+          )}
+        </form>
+      </main>
     </div>
   );
 }
@@ -564,7 +462,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
     {
       name: 'scaffold_project',
       description:
-        'Create a new project on disk. "consumer" mode creates an app using @imnotpizza/imnotpizza-libs. "standalone" mode creates an independent project with the same tech stack.',
+        'Create a new project on disk with the same tech stack (React 19, Vite, Tailwind, Zustand, React Query, Vitest, etc.)',
       inputSchema: {
         type: 'object' as const,
         properties: {
@@ -572,17 +470,12 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
             type: 'string',
             description: 'Absolute path where the project directory will be created',
           },
-          mode: {
-            type: 'string',
-            enum: ['consumer', 'standalone'],
-            description: 'consumer: uses the design system lib. standalone: independent project with same stack.',
-          },
           name: {
             type: 'string',
             description: 'Project name for package.json (defaults to directory name)',
           },
         },
-        required: ['path', 'mode'],
+        required: ['path'],
       },
     },
   ],
@@ -665,16 +558,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     case 'scaffold_project': {
       const targetPath = String(args?.path ?? '');
-      const mode = String(args?.mode ?? '') as 'consumer' | 'standalone';
       if (!targetPath) throw new Error('path is required');
-      if (mode !== 'consumer' && mode !== 'standalone') {
-        throw new Error('mode must be "consumer" or "standalone"');
-      }
 
       const projectName =
         String(args?.name ?? '') || targetPath.split('/').pop() || 'my-app';
       const deps = await readRepoDeps();
-      const templates = getTemplates(mode, projectName, deps);
+      const templates = getTemplates(projectName, deps);
 
       const created: string[] = [];
       for (const [relativePath, content] of Object.entries(templates)) {
@@ -691,7 +580,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             text: JSON.stringify(
               {
                 message: `Project scaffolded at ${targetPath}`,
-                mode,
                 name: projectName,
                 files: created,
                 next_steps: [
