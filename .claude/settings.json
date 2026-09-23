@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "prettier --write \"**/*.{ts,tsx,md}\"",
+            "args": [],
+            "timeout": 120,
+            "statusMessage": "Prettier formatting..."
+          }
+        ]
+      }
+    ]
+  }
+}
